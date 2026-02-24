@@ -37,9 +37,11 @@ The export step requires one of the following SVG-to-PNG tools. The skill auto-d
 
 ## Examples
 
-### [Bleep That Sh*t! — Iteration Showcase](examples/bleep-that-shit/showcase.html)
+### [Live Showcase: Bleep That Sh*t!](https://neonwatty.github.io/logo-designer-skill/)
 
-A complete, real-world example showing the skill in action: 5 initial concepts, 37 iterations across 10 design phases, ending with a polished comic book-styled logo. Open the showcase HTML file in a browser to see every step of the journey with interactive previews.
+A complete, real-world example showing the skill in action: 5 initial concepts, 37 iterations across 10 design phases, ending with a polished comic book-styled logo — all in ~10 minutes of conversation.
+
+The skill was also used to design the logo for [BugDrop](https://github.com/neonwatty/bugdrop), a GitHub feedback widget.
 
 ## License
 
