@@ -14,21 +14,81 @@ Design and iterate on logos using SVG. Generates side-by-side previews and expor
 
 ## Phase 1: Interview
 
-Before generating anything, ask the user these questions **one at a time**:
+Before generating anything, gather context and ask the user what they need.
 
-1. **Brand name** — What name should appear in the logo (if any)?
-2. **Purpose/vibe** — What is this logo for? What feeling should it convey? (e.g., "a developer tool that feels fast and minimal", "a kids' learning app that's playful and colorful")
-3. **Style** — What style direction? Offer these as starting points:
-   - Minimal / geometric
-   - Playful / hand-drawn
-   - Bold / corporate
-   - Retro / vintage
-   - Organic / natural
-   - Or "surprise me"
-4. **Color preferences** — Any specific colors, or "surprise me"?
-5. **Format** — Icon only (512x512), wordmark only (1024x512), or combination mark (1024x512)?
+### Step 1: Gather context automatically
 
-Keep the interview conversational. If the user gives a rich initial description, skip questions they've already answered. Move to Phase 2 once you have enough to generate distinct concepts.
+If the user points to a repo, URL, or existing project:
+- Read the README, package.json, CSS/config files, and any existing branding
+- Extract: project name, purpose, tech stack, color palette, design language, fonts
+- Summarize what you found before asking questions — this avoids asking things you already know
+
+If the user just says "design a logo" with no project context, skip to Step 2.
+
+### Step 2: Ask structured questions
+
+Use the `AskUserQuestion` tool to ask these questions. **Batch related questions together** (up to 4 per call) and **skip any question already answered** by the context gathered in Step 1 or by the user's initial message.
+
+**Question 1 — Format:**
+```
+question: "What format do you need?"
+header: "Format"
+options:
+  - label: "Icon only (512x512)"
+    description: "Square icon, works for favicons, app icons, social avatars"
+  - label: "Wordmark only"
+    description: "Text logo, 1024x512"
+  - label: "Combination mark"
+    description: "Icon + text together, 1024x512"
+```
+
+**Question 2 — Style direction:**
+```
+question: "What style direction?"
+header: "Style"
+options:
+  - label: "Minimal / geometric"
+    description: "Clean lines, simple shapes, modern feel"
+  - label: "Playful / hand-drawn"
+    description: "Friendly, casual, organic shapes"
+  - label: "Bold / corporate"
+    description: "Strong, professional, high contrast"
+  - label: "Match existing app style"
+    description: "I'll extract the design language from your project"
+```
+
+**Question 3 — Color preferences:**
+```
+question: "Any color preferences?"
+header: "Colors"
+options:
+  - label: "Use project colors"
+    description: "I'll pull colors from your existing design system"
+  - label: "Surprise me"
+    description: "I'll pick a palette that fits the vibe"
+  - label: "I have specific colors"
+    description: "I'll ask you for them"
+```
+
+**Question 4 — Output size** (only if the user mentioned a specific platform):
+```
+question: "Any specific size requirements?"
+header: "Size"
+options:
+  - label: "Standard sizes"
+    description: "16, 32, 48, 192, 512, 1024, 2048px — covers most uses"
+  - label: "Custom size needed"
+    description: "I'll ask for the exact dimensions"
+```
+
+### Adapting to context
+
+- **User points to a repo:** Gather context first, then ask only format + style (colors are likely known).
+- **User says "design a logo for X":** Ask format, style, and colors together.
+- **User gives detailed description:** Skip everything already covered, ask only what's missing.
+- **User says "just make something":** Use sensible defaults (icon only, minimal, surprise me) and go straight to Phase 2.
+
+Move to Phase 2 once you have enough to generate distinct concepts.
 
 ## SVG Conventions
 
