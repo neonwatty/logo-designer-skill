@@ -1,0 +1,17 @@
+{
+  "name": "logo-designer-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Claude Code skill for designing and iterating on logos using SVG",
+  "scripts": {
+    "validate": "npm run validate:md && npm run validate:skills && npm run validate:links",
+    "validate:md": "npx markdownlint-cli2 'skills/**/*.md' 'README.md'",
+    "validate:skills": "./scripts/validate-skills.sh",
+    "validate:links": "npx markdown-link-check -q skills/*/SKILL.md README.md || true",
+    "validate:plugin": "claude plugin validate ."
+  },
+  "devDependencies": {
+    "markdown-link-check": "^3.14.2",
+    "markdownlint-cli2": "^0.14.0"
+  }
+}

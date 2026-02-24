@@ -1,0 +1,21 @@
+{
+  "config": {
+    "default": true,
+    // Allow long lines (common in skill docs with code blocks and templates)
+    "MD013": false,
+    // Allow duplicate headings (Phase sections may repeat patterns)
+    "MD024": { "siblings_only": true },
+    // Allow HTML in markdown (preview templates use inline HTML)
+    "MD033": false,
+    // Allow bare URLs
+    "MD034": false,
+    // Allow fenced code blocks without language (pseudocode blocks in skill docs)
+    "MD040": false,
+    // Relaxed blank lines around fences (nested in list items)
+    "MD031": false,
+    // Relaxed blank lines around lists
+    "MD032": false,
+    // Allow non-sequential ordered list prefixes (continuation after sub-items)
+    "MD029": false
+  }
+}
