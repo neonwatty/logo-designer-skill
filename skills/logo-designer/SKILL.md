@@ -99,6 +99,7 @@ When generating SVG logos, follow these rules:
 - **Text handling** — Use widely available system fonts (Arial, Helvetica, Georgia, etc.) or convert text to `<path>` elements. When using system fonts, always include a generic fallback (e.g., `font-family="Helvetica, Arial, sans-serif"`).
 - **Meaningful groups** — Wrap logical sections in `<g>` elements with descriptive IDs: `id="icon"`, `id="wordmark"`, `id="tagline"`. This makes iteration easier when the user says "make the icon bigger" or "change the wordmark color".
 - **Flat fills by default** — Use solid `fill` colors. Only use gradients (`<linearGradient>`, `<radialGradient>`) when the user requests them or the style clearly calls for it.
+- **Small-size legibility** — Logos must work at 16-32px (favicons). Prefer solid fills over thin strokes, avoid fine details that disappear at small sizes, and use `stroke-width` of 6+ for any outlines that need to remain visible. Test this mentally: if a detail won't survive being 32px wide, simplify it.
 - **Clean markup** — No unnecessary transforms, no empty groups, no default namespace clutter. Keep the SVG readable.
 
 ## Phase 2: Explore
@@ -229,6 +230,27 @@ When generating `logos/preview.html`, use this template. Replace `{{CARDS}}` wit
 </html>
 ```
 
+#### Favicon size check strip
+
+During Phase 3 (Refine), add a "Favicon Size Check" section below the iteration grid. This renders each iteration at 64px, 32px, and 16px so the user can spot legibility issues early. Use this HTML pattern:
+
+```html
+<h2>Favicon Size Check</h2>
+<div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:end;">
+  <!-- Repeat for each iteration -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+    <div style="font-size:0.8rem;font-weight:500;">{{LABEL}}</div>
+    <div style="display:flex;gap:1rem;align-items:end;">
+      <div><img src="{{PATH}}" width="64" height="64"><div style="font-size:0.75rem;opacity:0.6;">64px</div></div>
+      <div><img src="{{PATH}}" width="32" height="32"><div style="font-size:0.75rem;opacity:0.6;">32px</div></div>
+      <div><img src="{{PATH}}" width="16" height="16"><div style="font-size:0.75rem;opacity:0.6;">16px</div></div>
+    </div>
+  </div>
+</div>
+```
+
+This is especially important for icon-only logos. If details disappear at 32px, suggest simplifying (remove fine details, thicken strokes, drop decorative elements).
+
 Each `{{CARDS}}` entry is:
 
 ```html
@@ -293,6 +315,7 @@ logos/
 - If the user wants to compare specific iterations, mention which filenames to look at in the preview
 - Keep SVG structure consistent across iterations (same group IDs) so the user can track what changed
 - Use parallel agents for batch exploration (3+ variations), sequential writes for single tweaks
+- **Check small-size legibility** — After generating iterations, include the favicon size check strip in the preview. If thin strokes vanish at 32px, proactively suggest thickening them. If fine details (clocks, sparkles, thin icons) become unreadable, suggest removing or simplifying them. This saves iteration cycles.
 - When the user is satisfied, move to Phase 4
 
 ## Phase 4: Export
@@ -324,3 +347,18 @@ The script produces:
 ### Export script location
 
 The export script is bundled with this skill at `scripts/export.sh` relative to the SKILL.md file. Use the skill's directory path to locate it.
+
+## Phase 5: Repo Integration (optional)
+
+If the user asks to commit the logo to a project repo or create a PR:
+
+1. **Identify target files** — Check the repo for existing icon/logo files: `public/favicon.svg`, `public/favicon.ico`, `public/pwa-*.png`, `public/apple-touch-icon.png`, `assets/logo.svg`, `ios/.../AppIcon.appiconset/`, `public/manifest.json`, etc.
+2. **Clone and branch** — Clone the repo (or use the existing checkout), create a branch like `chore/new-logo`
+3. **Replace files** — Copy the final SVG as the favicon/logo. Generate platform-specific sizes:
+   - `favicon.ico` — 48px (use ImageMagick `convert` or `magick`)
+   - `apple-touch-icon.png` — 180px
+   - `pwa-192x192.png` — 192px
+   - `pwa-512x512.png` — 512px
+   - iOS `AppIcon-512@2x.png` — 1024px
+   - Only replace files that already exist in the repo — don't add new ones the project doesn't use
+4. **Commit and PR** — Commit with a message like `chore: replace logo with new [description]`, push, and create a PR with a summary of what was updated
