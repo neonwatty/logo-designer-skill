@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 6: Rounded-square bg, gradient waveform, bleeped section replaced by a single solid gradient flat-line with a small mute icon -->
+  <defs>
+    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Normal waveform -->
+    <rect x="72" y="216" width="18" height="80" rx="9" fill="url(#g6)"/>
+    <rect x="100" y="176" width="18" height="160" rx="9" fill="url(#g6)"/>
+    <rect x="128" y="196" width="18" height="120" rx="9" fill="url(#g6)"/>
+    <rect x="156" y="156" width="18" height="200" rx="9" fill="url(#g6)"/>
+    <!-- Bleeped section — single flat line -->
+    <rect x="190" y="250" width="132" height="12" rx="6" fill="#ef4444"/>
+    <!-- Small speaker-off icon centered above the flat line -->
+    <g id="mute-icon" transform="translate(238, 200)">
+      <!-- Speaker body -->
+      <path d="M0 12 L8 12 L20 2 L20 34 L8 24 L0 24 Z" fill="#71717a"/>
+      <!-- Strike line -->
+      <line x1="26" y1="8" x2="38" y2="28" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+      <line x1="38" y1="8" x2="26" y2="28" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <!-- Normal waveform resumed -->
+    <rect x="336" y="166" width="18" height="180" rx="9" fill="url(#g6)"/>
+    <rect x="364" y="186" width="18" height="140" rx="9" fill="url(#g6)"/>
+    <rect x="392" y="196" width="18" height="120" rx="9" fill="url(#g6)"/>
+    <rect x="420" y="206" width="18" height="100" rx="9" fill="url(#g6)"/>
+  </g>
+</svg>

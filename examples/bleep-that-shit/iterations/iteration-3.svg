@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 3: Rounded-square background (like 2/2b), gradient waveform, bleeped section as red flat bars with a subtle strikethrough line -->
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Normal waveform -->
+    <rect x="80" y="220" width="16" height="72" rx="8" fill="url(#g3)"/>
+    <rect x="108" y="180" width="16" height="152" rx="8" fill="url(#g3)"/>
+    <rect x="136" y="200" width="16" height="112" rx="8" fill="url(#g3)"/>
+    <rect x="164" y="160" width="16" height="192" rx="8" fill="url(#g3)"/>
+    <!-- Bleeped section — red flat bars -->
+    <rect x="200" y="236" width="16" height="40" rx="8" fill="#ef4444"/>
+    <rect x="228" y="236" width="16" height="40" rx="8" fill="#ef4444"/>
+    <rect x="256" y="236" width="16" height="40" rx="8" fill="#ef4444"/>
+    <rect x="284" y="236" width="16" height="40" rx="8" fill="#ef4444"/>
+    <!-- Strikethrough line across bleeped section -->
+    <line x1="192" y1="256" x2="308" y2="256" stroke="#ef4444" stroke-width="3" opacity="0.5"/>
+    <!-- Normal waveform resumed -->
+    <rect x="320" y="170" width="16" height="172" rx="8" fill="url(#g3)"/>
+    <rect x="348" y="190" width="16" height="132" rx="8" fill="url(#g3)"/>
+    <rect x="376" y="200" width="16" height="112" rx="8" fill="url(#g3)"/>
+    <rect x="404" y="180" width="16" height="152" rx="8" fill="url(#g3)"/>
+  </g>
+</svg>

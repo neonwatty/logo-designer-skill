@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 12: Like 8 but red block is wider and shorter — more like a censor bar shape -->
+  <defs>
+    <linearGradient id="g12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Normal bars left -->
+    <rect x="84" y="200" width="36" height="112" rx="18" fill="url(#g12)"/>
+    <rect x="136" y="148" width="36" height="216" rx="18" fill="url(#g12)"/>
+    <rect x="188" y="172" width="36" height="168" rx="18" fill="url(#g12)"/>
+    <!-- Wide short red block -->
+    <rect x="240" y="228" width="120" height="56" rx="14" fill="#ef4444"/>
+    <!-- Normal bars right -->
+    <rect x="376" y="156" width="36" height="200" rx="18" fill="url(#g12)"/>
+    <rect x="428" y="192" width="36" height="128" rx="18" fill="url(#g12)"/>
+  </g>
+</svg>

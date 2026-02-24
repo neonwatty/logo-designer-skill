@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 1a: Censored Speech Bubble — rounder bubble, thicker censor bar, bolder grawlix -->
+  <defs>
+    <linearGradient id="grad1a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <path d="M256 52 C390 52 460 135 460 230 C460 325 390 408 256 408 C228 408 202 403 178 394 L108 452 L132 384 C78 350 52 295 52 230 C52 135 122 52 256 52 Z" fill="url(#grad1a)"/>
+    <!-- Wider censor bar -->
+    <rect x="100" y="195" width="312" height="70" rx="12" fill="#09090b"/>
+    <!-- Larger grawlix -->
+    <text x="256" y="245" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="44" font-weight="800" fill="#fafafa">!#@%*!</text>
+  </g>
+</svg>

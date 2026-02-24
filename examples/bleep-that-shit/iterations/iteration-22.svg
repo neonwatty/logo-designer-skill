@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 22: No outer container — just the bars and block floating, clean and modern -->
+  <defs>
+    <linearGradient id="g22" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Bars with generous spacing, no background -->
+    <rect x="56" y="184" width="44" height="144" rx="22" fill="url(#g22)"/>
+    <rect x="116" y="120" width="44" height="272" rx="22" fill="url(#g22)"/>
+    <rect x="176" y="156" width="44" height="200" rx="22" fill="url(#g22)"/>
+    <!-- Red block — square with heavy rounding -->
+    <rect x="236" y="196" width="120" height="120" rx="28" fill="#ef4444"/>
+    <!-- Bars resume -->
+    <rect x="372" y="140" width="44" height="232" rx="22" fill="url(#g22)"/>
+    <rect x="432" y="176" width="44" height="160" rx="22" fill="url(#g22)"/>
+  </g>
+</svg>

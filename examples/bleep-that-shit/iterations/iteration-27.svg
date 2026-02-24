@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 27: Minimal — just 2 bars each side, big HAL eye with bezel and glow, maximum presence -->
+  <defs>
+    <linearGradient id="g27" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <radialGradient id="hal27" cx="45%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#fca5a5"/>
+      <stop offset="30%" stop-color="#ef4444"/>
+      <stop offset="80%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </radialGradient>
+    <radialGradient id="glow27" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Bars left — just 2 -->
+    <rect x="80" y="192" width="36" height="128" rx="18" fill="url(#g27)"/>
+    <rect x="132" y="152" width="36" height="208" rx="18" fill="url(#g27)"/>
+    <!-- Glow -->
+    <circle cx="256" cy="256" r="108" fill="url(#glow27)"/>
+    <!-- HAL eye — big -->
+    <circle cx="256" cy="256" r="80" fill="#18181b"/>
+    <circle cx="256" cy="256" r="68" fill="#27272a"/>
+    <circle cx="256" cy="256" r="56" fill="url(#hal27)"/>
+    <!-- Specular -->
+    <circle cx="240" cy="240" r="10" fill="#fff" opacity="0.3"/>
+    <!-- Bars right — just 2 -->
+    <rect x="344" y="152" width="36" height="208" rx="18" fill="url(#g27)"/>
+    <rect x="396" y="192" width="36" height="128" rx="18" fill="url(#g27)"/>
+  </g>
+</svg>

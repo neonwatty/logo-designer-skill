@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 5: Bold Asterisk — a stylized * symbol (the universal profanity censor) -->
+  <defs>
+    <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Dark circle background -->
+    <circle cx="256" cy="256" r="230" fill="#09090b"/>
+    <!-- Asterisk made of 3 rounded bars crossing at center -->
+    <!-- Vertical bar -->
+    <rect x="232" y="80" width="48" height="352" rx="24" fill="url(#grad5)"/>
+    <!-- Diagonal bar top-left to bottom-right -->
+    <rect x="232" y="80" width="48" height="352" rx="24" fill="url(#grad5)" transform="rotate(60 256 256)"/>
+    <!-- Diagonal bar top-right to bottom-left -->
+    <rect x="232" y="80" width="48" height="352" rx="24" fill="url(#grad5)" transform="rotate(-60 256 256)"/>
+    <!-- Center dot -->
+    <circle cx="256" cy="256" r="32" fill="#fafafa"/>
+  </g>
+</svg>

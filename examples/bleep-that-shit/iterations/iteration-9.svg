@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 9: Like 7 but asymmetric waveform (more natural), 4 bars left, 3 red, 2 bars right -->
+  <defs>
+    <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Normal bars left — ascending then descending -->
+    <rect x="80" y="224" width="28" height="64" rx="14" fill="url(#g9)"/>
+    <rect x="120" y="184" width="28" height="144" rx="14" fill="url(#g9)"/>
+    <rect x="160" y="148" width="28" height="216" rx="14" fill="url(#g9)"/>
+    <rect x="200" y="172" width="28" height="168" rx="14" fill="url(#g9)"/>
+    <!-- Bleeped bars — short, red -->
+    <rect x="252" y="232" width="28" height="48" rx="14" fill="#ef4444"/>
+    <rect x="292" y="232" width="28" height="48" rx="14" fill="#ef4444"/>
+    <!-- Normal bars right — picking back up -->
+    <rect x="344" y="164" width="28" height="184" rx="14" fill="url(#g9)"/>
+    <rect x="384" y="188" width="28" height="136" rx="14" fill="url(#g9)"/>
+    <rect x="424" y="212" width="28" height="88" rx="14" fill="url(#g9)"/>
+  </g>
+</svg>

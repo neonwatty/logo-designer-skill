@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 4: Pixel Censor Block — inspired by pixelated/mosaic censorship in video -->
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Rounded square background -->
+    <rect x="40" y="40" width="432" height="432" rx="80" fill="url(#grad4)"/>
+    <!-- Pixelated censor grid — 4x3 mosaic blocks in center -->
+    <rect x="126" y="166" width="60" height="60" rx="4" fill="#09090b" opacity="0.9"/>
+    <rect x="196" y="166" width="60" height="60" rx="4" fill="#18181b" opacity="0.9"/>
+    <rect x="266" y="166" width="60" height="60" rx="4" fill="#09090b" opacity="0.9"/>
+    <rect x="336" y="166" width="60" height="60" rx="4" fill="#27272a" opacity="0.9"/>
+    <rect x="126" y="236" width="60" height="60" rx="4" fill="#27272a" opacity="0.9"/>
+    <rect x="196" y="236" width="60" height="60" rx="4" fill="#09090b" opacity="0.9"/>
+    <rect x="266" y="236" width="60" height="60" rx="4" fill="#18181b" opacity="0.9"/>
+    <rect x="336" y="236" width="60" height="60" rx="4" fill="#09090b" opacity="0.9"/>
+    <rect x="126" y="306" width="60" height="60" rx="4" fill="#18181b" opacity="0.9"/>
+    <rect x="196" y="306" width="60" height="60" rx="4" fill="#27272a" opacity="0.9"/>
+    <rect x="266" y="306" width="60" height="60" rx="4" fill="#09090b" opacity="0.9"/>
+    <rect x="336" y="306" width="60" height="60" rx="4" fill="#18181b" opacity="0.9"/>
+  </g>
+</svg>

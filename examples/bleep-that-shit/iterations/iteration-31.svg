@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 31: Dark comic — black bg, comic red eye with thick outlines, gradient bars red→yellow -->
+  <defs>
+    <linearGradient id="g31" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+    <radialGradient id="hal31" cx="42%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="50%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <!-- Drop shadow -->
+    <rect x="48" y="48" width="432" height="432" rx="80" fill="#E53935" opacity="0.3"/>
+    <!-- Dark panel -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#1a1a1a" stroke="#E53935" stroke-width="5"/>
+    <!-- Gradient bars left -->
+    <rect x="80" y="196" width="36" height="120" rx="10" fill="url(#g31)" stroke="#1a1a1a" stroke-width="3"/>
+    <rect x="130" y="152" width="36" height="208" rx="10" fill="url(#g31)" stroke="#1a1a1a" stroke-width="3"/>
+    <!-- HAL eye with thick comic outline -->
+    <circle cx="252" cy="256" r="72" fill="#1a1a1a" stroke="#E53935" stroke-width="5"/>
+    <circle cx="252" cy="256" r="56" fill="url(#hal31)"/>
+    <!-- Comic highlight -->
+    <circle cx="236" cy="240" r="12" fill="#FFFEF0" opacity="0.6"/>
+    <circle cx="262" cy="262" r="5" fill="#FFFEF0" opacity="0.3"/>
+    <!-- Gradient bars right -->
+    <rect x="340" y="152" width="36" height="208" rx="10" fill="url(#g31)" stroke="#1a1a1a" stroke-width="3"/>
+    <rect x="390" y="196" width="36" height="120" rx="10" fill="url(#g31)" stroke="#1a1a1a" stroke-width="3"/>
+  </g>
+</svg>

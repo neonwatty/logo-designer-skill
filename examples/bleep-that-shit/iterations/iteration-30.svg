@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 30: Comic book — red background panel, yellow bars, big eye, slightly tilted (-2deg vibe) -->
+  <defs>
+    <radialGradient id="hal30" cx="42%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#FFFEF0"/>
+      <stop offset="40%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#E53935"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <!-- Drop shadow -->
+    <rect x="50" y="50" width="432" height="432" rx="80" fill="#1a1a1a"/>
+    <!-- Red panel background, slightly rotated feel via rounded corners -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#E53935" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Yellow bars left -->
+    <rect x="80" y="200" width="38" height="112" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="132" y="152" width="38" height="208" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- Big HAL eye -->
+    <circle cx="252" cy="256" r="76" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="4"/>
+    <circle cx="252" cy="256" r="62" fill="#27272a"/>
+    <circle cx="252" cy="256" r="48" fill="url(#hal30)"/>
+    <!-- Highlight -->
+    <circle cx="236" cy="240" r="10" fill="#FFFEF0" opacity="0.7"/>
+    <!-- Yellow bars right -->
+    <rect x="340" y="152" width="38" height="208" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="392" y="200" width="38" height="112" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+</svg>

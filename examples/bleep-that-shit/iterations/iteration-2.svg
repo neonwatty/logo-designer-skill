@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 2: Waveform with censor bar containing three asterisks — clean and minimal -->
+  <defs>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="56" y="216" width="20" height="80" rx="10" fill="url(#g2)"/>
+    <rect x="88" y="166" width="20" height="180" rx="10" fill="url(#g2)"/>
+    <rect x="120" y="196" width="20" height="120" rx="10" fill="url(#g2)"/>
+    <rect x="152" y="136" width="20" height="240" rx="10" fill="url(#g2)"/>
+    <rect x="184" y="176" width="20" height="160" rx="10" fill="url(#g2)"/>
+    <rect x="216" y="146" width="20" height="220" rx="10" fill="url(#g2)"/>
+    <rect x="248" y="186" width="20" height="140" rx="10" fill="url(#g2)"/>
+    <rect x="280" y="156" width="20" height="200" rx="10" fill="url(#g2)"/>
+    <rect x="312" y="186" width="20" height="140" rx="10" fill="url(#g2)"/>
+    <rect x="344" y="146" width="20" height="220" rx="10" fill="url(#g2)"/>
+    <rect x="376" y="176" width="20" height="160" rx="10" fill="url(#g2)"/>
+    <rect x="408" y="196" width="20" height="120" rx="10" fill="url(#g2)"/>
+    <rect x="440" y="216" width="20" height="80" rx="10" fill="url(#g2)"/>
+    <!-- Censor bar with three asterisks -->
+    <rect x="180" y="230" width="152" height="52" rx="8" fill="#09090b" opacity="0.92"/>
+    <text x="256" y="267" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="36" font-weight="800" letter-spacing="12" fill="#fafafa">***</text>
+  </g>
+</svg>

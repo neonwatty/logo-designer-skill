@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 1b: Censored Speech Bubble — dark bubble on gradient background, inverted colors -->
+  <defs>
+    <linearGradient id="grad1b" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Gradient circle background -->
+    <circle cx="256" cy="256" r="230" fill="url(#grad1b)"/>
+    <!-- Dark speech bubble -->
+    <path d="M256 88 C370 88 430 152 430 228 C430 304 370 368 256 368 C234 368 214 364 196 358 L140 404 L158 348 C114 322 92 280 92 228 C92 152 142 88 256 88 Z" fill="#09090b"/>
+    <!-- Censor bar in gradient -->
+    <rect x="140" y="198" width="232" height="58" rx="10" fill="url(#grad1b)"/>
+    <!-- Grawlix dark on gradient -->
+    <text x="256" y="240" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="36" font-weight="800" fill="#09090b">*!@#%!</text>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 1c: Censored Speech Bubble — minimal, no background, just the bubble with thin censor bar -->
+  <defs>
+    <linearGradient id="grad1c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Speech bubble outline only -->
+    <path d="M256 60 C380 60 452 135 452 225 C452 315 380 390 256 390 C230 390 206 385 184 376 L115 430 L138 368 C86 336 60 285 60 225 C60 135 132 60 256 60 Z" fill="none" stroke="url(#grad1c)" stroke-width="20"/>
+    <!-- Thin censor bar -->
+    <rect x="130" y="200" width="252" height="48" rx="24" fill="url(#grad1c)"/>
+    <!-- Small grawlix, white -->
+    <text x="256" y="234" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#fafafa">*!@#%!</text>
+  </g>
+</svg>

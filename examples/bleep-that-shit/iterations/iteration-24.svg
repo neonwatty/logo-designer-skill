@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 24: Larger HAL eye, darker ring around it, fewer bars — more menacing -->
+  <defs>
+    <linearGradient id="g24" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <radialGradient id="hal24" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="60%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Bars left -->
+    <rect x="80" y="196" width="36" height="120" rx="18" fill="url(#g24)"/>
+    <rect x="132" y="156" width="36" height="200" rx="18" fill="url(#g24)"/>
+    <!-- HAL eye — radial gradient, larger -->
+    <circle cx="256" cy="256" r="72" fill="url(#hal24)"/>
+    <!-- Inner ring -->
+    <circle cx="256" cy="256" r="52" fill="none" stroke="#fca5a5" stroke-width="1.5" opacity="0.3"/>
+    <!-- Specular highlight -->
+    <circle cx="240" cy="240" r="10" fill="#fca5a5" opacity="0.5"/>
+    <!-- Bars right -->
+    <rect x="344" y="156" width="36" height="200" rx="18" fill="url(#g24)"/>
+    <rect x="396" y="196" width="36" height="120" rx="18" fill="url(#g24)"/>
+  </g>
+</svg>

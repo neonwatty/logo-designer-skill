@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 1: Censored Speech Bubble — a speech bubble with a bleep bar across it -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Speech bubble -->
+    <path d="M256 60 C380 60 452 130 452 220 C452 310 380 380 256 380 C230 380 206 376 184 368 L120 420 L140 360 C90 330 60 280 60 220 C60 130 132 60 256 60 Z" fill="url(#grad1)"/>
+    <!-- Censor bar -->
+    <rect x="120" y="190" width="272" height="60" rx="8" fill="#09090b"/>
+    <!-- Asterisks on bar -->
+    <text x="172" y="233" font-family="Inter, Helvetica, Arial, sans-serif" font-size="36" font-weight="800" fill="#fafafa">*!@#%!</text>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 3: Megaphone with Strike — a megaphone/speaker with a bold diagonal strike-through -->
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Circle background -->
+    <circle cx="256" cy="256" r="220" fill="#09090b"/>
+    <!-- Megaphone body -->
+    <path d="M160 210 L230 210 L340 140 L340 372 L230 302 L160 302 Z" fill="url(#grad3)"/>
+    <!-- Megaphone handle -->
+    <rect x="160" y="210" width="20" height="92" rx="4" fill="#7c3aed"/>
+    <!-- Sound waves -->
+    <path d="M360 200 Q400 256 360 312" fill="none" stroke="#a855f7" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+    <path d="M385 170 Q440 256 385 342" fill="none" stroke="#a855f7" stroke-width="12" stroke-linecap="round" opacity="0.3"/>
+    <!-- Strike-through -->
+    <line x1="100" y1="412" x2="412" y2="100" stroke="#ef4444" stroke-width="28" stroke-linecap="round"/>
+  </g>
+</svg>

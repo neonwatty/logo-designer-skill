@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 33: Red/pink HAL eye (more contrast against red bg), same bar layout -->
+  <defs>
+    <radialGradient id="hal33" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="55%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <!-- Drop shadow -->
+    <rect x="50" y="50" width="432" height="432" rx="80" fill="#1a1a1a"/>
+    <!-- Red panel -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#E53935" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Yellow bars left -->
+    <rect x="80" y="200" width="38" height="112" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="132" y="152" width="38" height="208" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- HAL eye with dark bezel for contrast -->
+    <circle cx="252" cy="256" r="76" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="4"/>
+    <circle cx="252" cy="256" r="62" fill="#1a1a1a"/>
+    <circle cx="252" cy="256" r="48" fill="url(#hal33)"/>
+    <!-- Highlights -->
+    <circle cx="236" cy="240" r="11" fill="#FFFEF0" opacity="0.8"/>
+    <circle cx="260" cy="262" r="5" fill="#FFFEF0" opacity="0.4"/>
+    <!-- Yellow bars right -->
+    <rect x="340" y="152" width="38" height="208" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="392" y="200" width="38" height="112" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+</svg>

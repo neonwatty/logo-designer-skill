@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 32: Pop art — blue panel, pink bars, red eye, maximum comic energy, 3 bars each side -->
+  <defs>
+    <radialGradient id="hal32" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="60%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <!-- Drop shadow -->
+    <rect x="48" y="48" width="432" height="432" rx="80" fill="#1a1a1a"/>
+    <!-- Blue panel -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#1E88E5" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Pink bars left -->
+    <rect x="72" y="216" width="32" height="80" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="116" y="172" width="32" height="168" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="160" y="148" width="32" height="216" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- HAL eye -->
+    <circle cx="252" cy="252" r="64" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="5"/>
+    <circle cx="252" cy="252" r="50" fill="url(#hal32)"/>
+    <!-- Highlights -->
+    <circle cx="236" cy="236" r="11" fill="#FFFEF0" opacity="0.8"/>
+    <circle cx="260" cy="258" r="5" fill="#FFFEF0" opacity="0.4"/>
+    <!-- Pink bars right -->
+    <rect x="320" y="148" width="32" height="216" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="364" y="172" width="32" height="168" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="408" y="216" width="32" height="80" rx="10" fill="#FF4081" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+</svg>

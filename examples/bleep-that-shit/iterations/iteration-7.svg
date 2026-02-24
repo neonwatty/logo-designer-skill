@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 7: Fewer, thicker bars, bigger gap between normal and bleeped, high contrast -->
+  <defs>
+    <linearGradient id="g7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- 3 thick normal bars left -->
+    <rect x="88" y="186" width="32" height="140" rx="16" fill="url(#g7)"/>
+    <rect x="136" y="146" width="32" height="220" rx="16" fill="url(#g7)"/>
+    <rect x="184" y="170" width="32" height="172" rx="16" fill="url(#g7)"/>
+    <!-- 3 thick bleeped bars center — short and red -->
+    <rect x="240" y="228" width="32" height="56" rx="16" fill="#ef4444"/>
+    <rect x="288" y="228" width="32" height="56" rx="16" fill="#ef4444"/>
+    <rect x="336" y="228" width="32" height="56" rx="16" fill="#ef4444"/>
+    <!-- 2 thick normal bars right -->
+    <rect x="392" y="166" width="32" height="180" rx="16" fill="url(#g7)"/>
+  </g>
+</svg>

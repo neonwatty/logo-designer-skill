@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 34: Beefier bars (wider + 3 per side), red/pink HAL eye -->
+  <defs>
+    <radialGradient id="hal34" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="55%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+  </defs>
+  <g id="icon">
+    <!-- Drop shadow -->
+    <rect x="50" y="50" width="432" height="432" rx="80" fill="#1a1a1a"/>
+    <!-- Red panel -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#E53935" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Yellow bars left — 3 bars, beefier -->
+    <rect x="68" y="228" width="30" height="56" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="108" y="188" width="30" height="136" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="148" y="152" width="30" height="208" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- HAL eye -->
+    <circle cx="252" cy="256" r="72" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="4"/>
+    <circle cx="252" cy="256" r="58" fill="#1a1a1a"/>
+    <circle cx="252" cy="256" r="44" fill="url(#hal34)"/>
+    <!-- Highlights -->
+    <circle cx="238" cy="244" r="10" fill="#FFFEF0" opacity="0.8"/>
+    <circle cx="258" cy="260" r="4" fill="#FFFEF0" opacity="0.4"/>
+    <!-- Yellow bars right — 3 bars, beefier -->
+    <rect x="326" y="152" width="30" height="208" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="366" y="188" width="30" height="136" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="406" y="228" width="30" height="56" rx="8" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+</svg>

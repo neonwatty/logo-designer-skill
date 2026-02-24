@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 23: Centered red circle, bars symmetrically flanking it -->
+  <defs>
+    <linearGradient id="g23" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Bars left — symmetrical, fanning out -->
+    <rect x="76" y="216" width="32" height="80" rx="16" fill="url(#g23)"/>
+    <rect x="120" y="180" width="32" height="152" rx="16" fill="url(#g23)"/>
+    <rect x="164" y="152" width="32" height="208" rx="16" fill="url(#g23)"/>
+    <!-- Centered red circle — HAL eye -->
+    <circle cx="256" cy="256" r="56" fill="#ef4444"/>
+    <!-- Inner glow ring -->
+    <circle cx="256" cy="256" r="40" fill="none" stroke="#fca5a5" stroke-width="2" opacity="0.4"/>
+    <!-- Highlight dot -->
+    <circle cx="244" cy="244" r="8" fill="#fca5a5" opacity="0.6"/>
+    <!-- Bars right — mirror of left -->
+    <rect x="316" y="152" width="32" height="208" rx="16" fill="url(#g23)"/>
+    <rect x="360" y="180" width="32" height="152" rx="16" fill="url(#g23)"/>
+    <rect x="404" y="216" width="32" height="80" rx="16" fill="url(#g23)"/>
+  </g>
+</svg>

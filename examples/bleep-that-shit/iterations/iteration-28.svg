@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 28: Comic book HAL — thick black outlines, comic red/yellow palette, hard drop shadow -->
+  <defs>
+    <linearGradient id="g28" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Outer rounded square with comic drop shadow -->
+    <rect x="48" y="48" width="432" height="432" rx="80" fill="#1a1a1a" opacity="0.9"/>
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#FFD600" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Bars left — thick comic outlines -->
+    <rect x="76" y="192" width="40" height="120" rx="12" fill="#E53935" stroke="#1a1a1a" stroke-width="5"/>
+    <rect x="132" y="144" width="40" height="216" rx="12" fill="#E53935" stroke="#1a1a1a" stroke-width="5"/>
+    <!-- HAL eye — comic style with thick border -->
+    <circle cx="252" cy="252" r="72" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="5"/>
+    <circle cx="252" cy="252" r="58" fill="#E53935"/>
+    <!-- Highlight — comic style white flash -->
+    <circle cx="236" cy="236" r="14" fill="#FFFEF0" opacity="0.7"/>
+    <circle cx="264" cy="260" r="6" fill="#FFFEF0" opacity="0.4"/>
+    <!-- Bars right -->
+    <rect x="340" y="144" width="40" height="216" rx="12" fill="#E53935" stroke="#1a1a1a" stroke-width="5"/>
+    <rect x="396" y="192" width="40" height="120" rx="12" fill="#E53935" stroke="#1a1a1a" stroke-width="5"/>
+  </g>
+</svg>

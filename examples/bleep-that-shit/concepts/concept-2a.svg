@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 2a: Bleep Waveform — circular background, more bars, bleeped section in gradient instead of red -->
+  <defs>
+    <linearGradient id="grad2a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Circle background -->
+    <circle cx="256" cy="256" r="230" fill="#09090b"/>
+    <!-- Waveform bars — normal (white/light) -->
+    <rect x="68" y="226" width="14" height="60" rx="7" fill="#a1a1aa"/>
+    <rect x="92" y="196" width="14" height="120" rx="7" fill="#a1a1aa"/>
+    <rect x="116" y="210" width="14" height="92" rx="7" fill="#a1a1aa"/>
+    <rect x="140" y="176" width="14" height="160" rx="7" fill="#a1a1aa"/>
+    <rect x="164" y="196" width="14" height="120" rx="7" fill="#a1a1aa"/>
+    <!-- Bleeped section — flat, muted with gradient accent bar on top -->
+    <rect x="198" y="242" width="14" height="28" rx="7" fill="url(#grad2a)"/>
+    <rect x="222" y="242" width="14" height="28" rx="7" fill="url(#grad2a)"/>
+    <rect x="246" y="242" width="14" height="28" rx="7" fill="url(#grad2a)"/>
+    <rect x="270" y="242" width="14" height="28" rx="7" fill="url(#grad2a)"/>
+    <rect x="294" y="242" width="14" height="28" rx="7" fill="url(#grad2a)"/>
+    <!-- Waveform bars — normal resumed -->
+    <rect x="328" y="186" width="14" height="140" rx="7" fill="#a1a1aa"/>
+    <rect x="352" y="200" width="14" height="112" rx="7" fill="#a1a1aa"/>
+    <rect x="376" y="176" width="14" height="160" rx="7" fill="#a1a1aa"/>
+    <rect x="400" y="206" width="14" height="100" rx="7" fill="#a1a1aa"/>
+    <rect x="424" y="220" width="14" height="72" rx="7" fill="#a1a1aa"/>
+  </g>
+</svg>
