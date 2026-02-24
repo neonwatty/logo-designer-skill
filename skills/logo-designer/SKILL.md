@@ -105,9 +105,31 @@ When generating SVG logos, follow these rules:
 
 Generate 3-5 **distinct** SVG logo concepts. Each concept should take a meaningfully different creative direction — vary the icon metaphor, typography style, layout, or overall aesthetic. Do not generate minor variations of the same idea.
 
-### File output
+### Parallel generation
 
-Create the following directory structure in the user's working directory:
+Use the `Task` tool to generate all concepts in parallel. This is significantly faster than writing them sequentially.
+
+1. Create the `logos/concepts/` directory first
+2. Dispatch one `Task` agent per concept, all in the **same message** so they run concurrently. Each agent should:
+   - Receive the full design brief (format, style, colors, viewBox, SVG conventions)
+   - Be assigned a specific creative direction (e.g., "geometric letterform", "abstract symbol", "mascot-based")
+   - Write its SVG to a specific file path (e.g., `logos/concepts/concept-1.svg`)
+   - Use `subagent_type: "general-purpose"` and `mode: "bypassPermissions"`
+3. After all agents complete, generate `logos/preview.html` and present the results
+
+**Example dispatch pattern** (all in one message):
+
+```
+Task 1: "Write logos/concepts/concept-1.svg — geometric letterform using [colors]. viewBox 512x512. Self-contained SVG, no external fonts. [full SVG conventions]."
+
+Task 2: "Write logos/concepts/concept-2.svg — abstract symbol using [colors]. viewBox 512x512. Self-contained SVG, no external fonts. [full SVG conventions]."
+
+Task 3: "Write logos/concepts/concept-3.svg — mascot-based icon using [colors]. viewBox 512x512. Self-contained SVG, no external fonts. [full SVG conventions]."
+```
+
+Each agent prompt must include: the full SVG conventions from this skill, the target file path, the specific creative direction, and all relevant context (project name, colors, style preferences). Agents do not share context — give each one everything it needs.
+
+### File output
 
 ```
 logos/
@@ -119,12 +141,12 @@ logos/
 └── preview.html
 ```
 
-1. Create the `logos/concepts/` directory
-2. Write each concept as a separate SVG file
-3. Generate `logos/preview.html` using the preview template below
-4. Tell the user to open `logos/preview.html` in their browser
-5. Briefly describe each concept (1 sentence each) so the user can match descriptions to visuals
-6. Ask: "Which direction do you want to explore? Pick a number, or describe what you like/dislike across them."
+After all parallel agents complete:
+
+1. Generate `logos/preview.html` using the preview template below
+2. Tell the user to open `logos/preview.html` in their browser
+3. Briefly describe each concept (1 sentence each) so the user can match descriptions to visuals
+4. Ask: "Which direction do you want to explore? Pick a number, or describe what you like/dislike across them."
 
 ### Preview HTML Template
 
@@ -226,6 +248,28 @@ During **explore**, show all concepts. During **refine**, show all iterations (m
 
 Once the user picks a concept direction, iterate on it.
 
+### Single vs. batch iterations
+
+**Single iteration** — When the user gives specific feedback ("make the icon bigger", "change the blue to green"), apply the change directly and write the next iteration SVG yourself.
+
+**Batch variations** — When exploring multiple directions at once ("try different color palettes", "show me 5 variations of the eye shape", "experiment with bar count"), use the `Task` tool to generate variations in parallel, just like Phase 2:
+
+1. Dispatch one `Task` agent per variation, all in the same message
+2. Each agent receives: the base SVG content (copy the full SVG inline in the prompt), the specific variation to apply, the target file path, and the full SVG conventions
+3. After all agents complete, regenerate `logos/preview.html` and present the results
+
+**Example batch dispatch:**
+
+```
+Task 1: "Take this base SVG [full SVG content] and create a variation with a warm color palette (reds, oranges, yellows). Write to logos/iterations/iteration-5.svg."
+
+Task 2: "Take this base SVG [full SVG content] and create a variation with a cool color palette (blues, teals, purples). Write to logos/iterations/iteration-6.svg."
+
+Task 3: "Take this base SVG [full SVG content] and create a variation with a monochrome palette (grays + one accent). Write to logos/iterations/iteration-7.svg."
+```
+
+Use `subagent_type: "general-purpose"` and `mode: "bypassPermissions"` for each agent. Always include the full base SVG content in each agent's prompt — agents do not share context.
+
 ### File output
 
 ```
@@ -248,6 +292,7 @@ logos/
 - If the user says "go back to iteration N", use that as the new base
 - If the user wants to compare specific iterations, mention which filenames to look at in the preview
 - Keep SVG structure consistent across iterations (same group IDs) so the user can track what changed
+- Use parallel agents for batch exploration (3+ variations), sequential writes for single tweaks
 - When the user is satisfied, move to Phase 4
 
 ## Phase 4: Export
