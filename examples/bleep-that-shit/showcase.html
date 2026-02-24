@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bleep That Sh*t! — Logo Design Iteration Showcase</title>
+<title>logo-designer-skill — Iterative Logo Design for Claude Code</title>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -50,7 +50,7 @@
   /* Theme Toggle */
   .theme-toggle {
     position: fixed;
-    top: 20px;
+    top: 64px;
     right: 20px;
     z-index: 100;
     background: var(--bg-card);
@@ -71,7 +71,7 @@
   /* Hero */
   .hero {
     text-align: center;
-    padding: 80px 24px 60px;
+    padding: 120px 24px 60px;
     position: relative;
     overflow: hidden;
   }
@@ -85,13 +85,6 @@
     height: 600px;
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     pointer-events: none;
-  }
-  .hero-logo {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 32px;
-    filter: drop-shadow(0 0 40px var(--accent-glow));
-    animation: float 4s ease-in-out infinite;
   }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -111,6 +104,7 @@
     max-width: 640px;
     margin: 0 auto;
   }
+  .hero .subtitle a:hover { text-decoration: underline; }
   .hero .stats {
     display: flex;
     justify-content: center;
@@ -142,9 +136,26 @@
     padding: 0 24px;
   }
 
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 56px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--yellow));
+    opacity: 0.3;
+  }
+
   /* Phase Section */
   .phase {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
+    position: relative;
   }
   .phase-header {
     display: flex;
@@ -153,6 +164,7 @@
     margin-bottom: 32px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
+    margin-left: -56px;
   }
   .phase-number {
     flex-shrink: 0;
@@ -166,6 +178,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 6px var(--bg);
   }
   .phase-info h2 {
     font-size: 1.5rem;
@@ -177,6 +192,27 @@
     color: var(--text-muted);
     font-size: 0.95rem;
     max-width: 700px;
+  }
+
+  /* Flow arrow between phases */
+  .flow-connector {
+    margin: 0 0 60px -56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 14px;
+  }
+  .flow-connector .arrow {
+    color: var(--accent);
+    font-size: 1.5rem;
+    opacity: 0.5;
+    line-height: 1;
+  }
+  .flow-connector .flow-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.6;
   }
 
   /* Image Grid */
@@ -227,12 +263,6 @@
     font-weight: 700;
   }
 
-  /* Divider */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 80px 0;
-  }
 
   /* Favicon Preview */
   .favicon-section {
@@ -311,6 +341,120 @@
     border-radius: 50px;
   }
 
+  /* Top Nav */
+  .topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .topnav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-heading);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .topnav-brand svg {
+    width: 28px;
+    height: 28px;
+  }
+  .topnav-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .topnav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: var(--transition);
+  }
+  .topnav-links a:hover {
+    color: var(--text-heading);
+    background: var(--bg-card);
+  }
+  .topnav-links .gh-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .topnav-links .gh-btn:hover {
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+  }
+  .topnav-links .gh-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    padding: 80px 24px;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 12px;
+  }
+  .cta-section p {
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 32px;
+    font-size: 1.05rem;
+  }
+  .cta-install {
+    display: inline-block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 28px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.95rem;
+    color: var(--yellow);
+    letter-spacing: 0.01em;
+    user-select: all;
+    cursor: text;
+    transition: var(--transition);
+  }
+  .cta-install:hover {
+    border-color: var(--border-active);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .cta-hint {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .cta-hint a { color: var(--accent); text-decoration: none; }
+  .cta-hint a:hover { text-decoration: underline; }
+
   /* Footer */
   .footer {
     text-align: center;
@@ -319,32 +463,61 @@
     color: var(--text-muted);
     font-size: 0.85rem;
   }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
   .footer a {
     color: var(--accent);
     text-decoration: none;
   }
   .footer a:hover { text-decoration: underline; }
 
-  /* Arrow between grids */
-  .flow-arrow {
-    text-align: center;
-    padding: 20px 0;
-    color: var(--text-muted);
-    font-size: 1.5rem;
-    opacity: 0.4;
-  }
 
   /* Responsive */
   @media (max-width: 600px) {
-    .hero { padding: 60px 16px 40px; }
-    .hero-logo { width: 140px; height: 140px; }
+    .topnav { padding: 10px 16px; }
+    .topnav-links a:not(.gh-btn) { display: none; }
+    .hero { padding: 100px 16px 40px; }
+    .timeline { padding-left: 40px; }
+    .timeline::before { left: 15px; }
+    .phase-header { margin-left: -40px; flex-direction: column; gap: 12px; }
+    .phase-number { width: 32px; height: 32px; font-size: 0.9rem; }
+    .flow-connector { margin-left: -40px; padding-left: 6px; }
     .grid-5, .grid-3, .grid-6 { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-    .phase-header { flex-direction: column; gap: 12px; }
     .stats { gap: 24px; }
+    .theme-toggle { top: 56px; right: 12px; padding: 6px 12px; font-size: 12px; }
+    .cta-install { font-size: 0.8rem; padding: 12px 16px; }
   }
 </style>
 </head>
 <body>
+
+<!-- Top Navigation -->
+<nav class="topnav">
+  <a class="topnav-brand" href="https://github.com/neonwatty/logo-designer-skill">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="28" height="28" rx="6" fill="var(--accent)"/>
+      <circle cx="16" cy="16" r="6" fill="#1a1a1a"/>
+      <circle cx="16" cy="16" r="4" fill="#FF4081"/>
+      <circle cx="14.5" cy="14.5" r="1.2" fill="#fff" opacity="0.8"/>
+      <rect x="5" y="13" width="3" height="6" rx="1" fill="var(--yellow)"/>
+      <rect x="24" y="13" width="3" height="6" rx="1" fill="var(--yellow)"/>
+    </svg>
+    logo-designer-skill
+  </a>
+  <div class="topnav-links">
+    <a href="https://github.com/neonwatty/logo-designer-skill#installation">Install</a>
+    <a href="https://github.com/neonwatty/logo-designer-skill#usage">Usage</a>
+    <a class="gh-btn" href="https://github.com/neonwatty/logo-designer-skill">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
 
 <!-- Theme Toggle -->
 <button class="theme-toggle" onclick="toggleTheme()">
@@ -360,9 +533,8 @@
 
 <!-- Hero -->
 <section class="hero">
-  <img class="hero-logo" src="iterations/iteration-37.svg" alt="Bleep That Sh*t! final logo">
-  <h1>Designing <span>Bleep That Sh*t!</span></h1>
-  <p class="subtitle">A complete iteration showcase demonstrating the logo-designer-skill workflow &mdash; from initial concepts to final polished logo in 37 iterations.</p>
+  <h1><span>logo-designer-skill</span></h1>
+  <p class="subtitle">Iterative logo design for Claude Code. Describe your project, explore concepts, refine through conversation, export production PNGs &mdash; all without leaving the terminal.</p>
   <div class="stats">
     <div class="stat">
       <div class="stat-number">5</div>
@@ -376,10 +548,22 @@
       <div class="stat-number">10</div>
       <div class="stat-label">Design Phases</div>
     </div>
+    <div class="stat">
+      <div class="stat-number">~10</div>
+      <div class="stat-label">Minutes</div>
+    </div>
   </div>
 </section>
 
+<!-- Case Study Intro -->
+<div class="container" style="text-align: center; padding-bottom: 60px;">
+  <img src="iterations/iteration-37.svg" alt="Bleep That Sh*t! final logo" style="width: 120px; height: 120px; margin-bottom: 16px; filter: drop-shadow(0 0 20px var(--accent-glow));">
+  <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--text-heading); margin-bottom: 8px;">Case Study: <a href="https://bleep-that-sht.com" style="color: var(--accent); text-decoration: none;">Bleep That Sh*t!</a></h2>
+  <p style="color: var(--text-muted); max-width: 560px; margin: 0 auto; font-size: 0.95rem;">An in-browser audio/video censorship tool with a comic book aesthetic. Here's the full iteration journey from first concept to final logo.</p>
+</div>
+
 <div class="container">
+<div class="timeline">
 
 <!-- Phase 1: Initial Concepts -->
 <section class="phase">
@@ -413,6 +597,8 @@
     </div>
   </div>
 </section>
+
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">User picks favorites</span></div>
 
 <!-- Phase 2: Variations on Favorites -->
 <section class="phase">
@@ -451,7 +637,7 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Waveform direction wins</span></div>
 
 <!-- Phase 3: Waveform + Censor -->
 <section class="phase">
@@ -472,6 +658,8 @@
   </div>
 </section>
 
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Needs to work at small sizes</span></div>
+
 <!-- Phase 4: Favicon Focus -->
 <section class="phase">
   <div class="phase-header">
@@ -488,6 +676,8 @@
     <div class="card" onclick="openLightbox(this)"><img src="iterations/iteration-10.svg" alt="Iteration 10"><div class="card-label">Iter 10</div></div>
   </div>
 </section>
+
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Red block reads best at favicon size</span></div>
 
 <!-- Phase 5: Red Block Variations -->
 <section class="phase">
@@ -508,7 +698,7 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Creative pivot &mdash; try something new</span></div>
 
 <!-- Phase 6: Fresh Directions — HAL 9000 -->
 <section class="phase">
@@ -529,6 +719,8 @@
   </div>
 </section>
 
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">HAL eye concept locks in</span></div>
+
 <!-- Phase 7: Refining the HAL Eye -->
 <section class="phase">
   <div class="phase-header">
@@ -546,6 +738,8 @@
     <div class="card" onclick="openLightbox(this)"><img src="iterations/iteration-27.svg" alt="Iteration 27"><div class="card-label">Iter 27</div></div>
   </div>
 </section>
+
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Match the app's comic book aesthetic</span></div>
 
 <!-- Phase 8: Comic Book Styling -->
 <section class="phase">
@@ -565,7 +759,7 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Dial in the details</span></div>
 
 <!-- Phase 9: Final Refinements -->
 <section class="phase">
@@ -585,6 +779,8 @@
   </div>
 </section>
 
+<div class="flow-connector"><span class="arrow">&#8595;</span><span class="flow-label">Done!</span></div>
+
 <!-- Phase 10: The Final Logo -->
 <section class="phase">
   <div class="phase-header">
@@ -599,7 +795,8 @@
   </div>
 </section>
 
-</div>
+</div><!-- end timeline -->
+</div><!-- end container -->
 
 <!-- Favicon Preview -->
 <section class="favicon-section">
@@ -639,8 +836,22 @@
   </div>
 </section>
 
+<!-- Get Started CTA -->
+<section class="cta-section">
+  <h2>Design your own logo</h2>
+  <p>Install the skill and start iterating. Just describe what you're building and Claude handles the rest.</p>
+  <div class="cta-install">claude plugin add neonwatty/logo-designer-skill</div>
+  <div class="cta-hint">Then say "design a logo" to get started. <a href="https://github.com/neonwatty/logo-designer-skill#usage">Read the docs &rarr;</a></div>
+</section>
+
 <!-- Footer -->
 <footer class="footer">
+  <div class="footer-links">
+    <a href="https://github.com/neonwatty/logo-designer-skill">GitHub Repo</a>
+    <a href="https://github.com/neonwatty/logo-designer-skill/issues">Report an Issue</a>
+    <a href="https://github.com/neonwatty/logo-designer-skill#installation">Installation</a>
+    <a href="https://github.com/neonwatty/logo-designer-skill/blob/main/LICENSE">MIT License</a>
+  </div>
   Built with <a href="https://github.com/neonwatty/logo-designer-skill">logo-designer-skill</a> &mdash; a Claude Code plugin for iterative logo design.
 </footer>
 
