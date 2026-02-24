@@ -161,3 +161,31 @@ Each `{{CARDS}}` entry is:
 Where `{{PATH}}` is the relative path from `logos/` (e.g., `concepts/concept-1.svg` or `iterations/iteration-3.svg`) and `{{LABEL}}` is the filename without extension (e.g., "concept-1" or "iteration-3").
 
 During **explore**, show all concepts. During **refine**, show all iterations (most recent first).
+
+## Phase 3: Refine
+
+Once the user picks a concept direction, iterate on it.
+
+### File output
+
+```
+logos/
+├── iterations/
+│   ├── iteration-1.svg    # First refinement (based on chosen concept)
+│   ├── iteration-2.svg
+│   └── ...
+└── preview.html           # Regenerated to show iterations
+```
+
+1. Copy the chosen concept as the starting point — save the first refinement as `logos/iterations/iteration-1.svg`
+2. Apply the user's feedback and save each new version with an incrementing number
+3. Regenerate `logos/preview.html` after each iteration, showing all iterations (most recent first) so the user can compare
+4. Tell the user to refresh their browser after each iteration
+5. After each iteration, briefly describe what changed and ask for next feedback
+
+### Iteration tips
+
+- If the user says "go back to iteration N", use that as the new base
+- If the user wants to compare specific iterations, mention which filenames to look at in the preview
+- Keep SVG structure consistent across iterations (same group IDs) so the user can track what changed
+- When the user is satisfied, move to Phase 4
