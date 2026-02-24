@@ -65,3 +65,99 @@ logos/
 4. Tell the user to open `logos/preview.html` in their browser
 5. Briefly describe each concept (1 sentence each) so the user can match descriptions to visuals
 6. Ask: "Which direction do you want to explore? Pick a number, or describe what you like/dislike across them."
+
+### Preview HTML Template
+
+When generating `logos/preview.html`, use this template. Replace `{{CARDS}}` with one card per SVG file. Set `{{PHASE}}` to "Concepts" during explore or "Iterations" during refine.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Preview — {{PHASE}}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 2rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.light { background: #f5f5f5; color: #333; }
+  body.dark { background: #1a1a1a; color: #eee; }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  h1 { font-size: 1.5rem; font-weight: 600; }
+  .toggle {
+    padding: 0.5rem 1rem;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .card-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 240px;
+  }
+  body.light .card-img { background: #fff; }
+  body.dark .card-img { background: #2a2a2a; }
+  .card-img img {
+    max-width: 100%;
+    max-height: 200px;
+  }
+  .card-label {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  body.light .card-label { background: #fafafa; }
+  body.dark .card-label { background: #222; }
+</style>
+</head>
+<body class="light">
+  <div class="header">
+    <h1>Logo Preview — {{PHASE}}</h1>
+    <button class="toggle" onclick="document.body.classList.toggle('dark'); document.body.classList.toggle('light'); this.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';">🌙 Dark</button>
+  </div>
+  <div class="grid">
+    {{CARDS}}
+  </div>
+</body>
+</html>
+```
+
+Each `{{CARDS}}` entry is:
+
+```html
+<div class="card">
+  <div class="card-img">
+    <img src="{{PATH}}" alt="{{LABEL}}">
+  </div>
+  <div class="card-label">{{LABEL}}</div>
+</div>
+```
+
+Where `{{PATH}}` is the relative path from `logos/` (e.g., `concepts/concept-1.svg` or `iterations/iteration-3.svg`) and `{{LABEL}}` is the filename without extension (e.g., "concept-1" or "iteration-3").
+
+During **explore**, show all concepts. During **refine**, show all iterations (most recent first).
