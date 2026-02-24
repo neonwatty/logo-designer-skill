@@ -1,0 +1,11 @@
+{
+  "name": "logo-designer-skill",
+  "version": "1.0.0",
+  "description": "Design and iterate on logos using SVG with Claude Code",
+  "author": {
+    "name": "Jeremy Watt"
+  },
+  "repository": "https://github.com/neonwatty/logo-designer-skill",
+  "license": "MIT",
+  "keywords": ["logo", "svg", "design", "icon", "branding"]
+}
