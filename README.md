@@ -1,5 +1,7 @@
 # Logo Designer Skill
 
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-7289da?style=flat&logo=discord&logoColor=white)](https://discord.gg/7xsxU4ZG6A)
+
 A Claude Code plugin for iterative logo design using SVG. Guides you through a structured interview, exploration, and refinement process to produce polished logos exported as PNGs.
 
 > **Read the full walkthrough:** [Claude Code SVG Logo Design: A Reusable Skill for Generating Logos](https://neonwatty.com/posts/logo-designer-skill-claude-code/) — how the skill was built and how to use it end-to-end.
