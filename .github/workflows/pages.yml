@@ -1,8 +1,16 @@
-name: Deploy to GitHub Pages
+name: Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -16,21 +24,16 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build site
-        run: |
-          mkdir -p _site
-          cp examples/bleep-that-shit/showcase.html _site/index.html
-          cp -r examples/bleep-that-shit/concepts _site/concepts
-          cp -r examples/bleep-that-shit/iterations _site/iterations
-
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4

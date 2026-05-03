@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Claude Code plugin for iterative logo design using SVG. Guides you through interview, exploration, and refinement to produce polished logos exported as PNGs.">
+  <link rel="canonical" href="https://neonwatty.github.io/logo-designer-skill/">
+  <meta property="og:title" content="Logo Designer Skill - AI logo design from your terminal">
+  <meta property="og:description" content="A Claude Code plugin that guides you through a structured interview, exploration, and refinement process to produce polished SVG logos exported as PNGs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://neonwatty.github.io/logo-designer-skill/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Logo Designer Skill - AI logo design from your terminal">
+  <meta name="twitter:description" content="A Claude Code plugin for iterative logo design using SVG. Interview, explore, refine, export.">
+  <title>Logo Designer Skill - AI logo design from your terminal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#main" aria-label="Logo Designer Skill home">
+      <span class="brand-mark">L</span>
+      <span>Logo Designer</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#workflow">Workflow</a>
+      <a href="#export">Export</a>
+      <a href="#install">Install</a>
+      <a href="#prerequisites">Prerequisites</a>
+      <a href="https://github.com/neonwatty/logo-designer-skill">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A Claude Code plugin for iterative logo design using SVG</p>
+        <h1>Design logos with AI, right from your terminal.</h1>
+        <p class="lede">
+          Guides you through a structured interview, exploration, and refinement process to produce polished logos exported as PNGs.
+        </p>
+        <div class="actions" aria-label="Primary actions">
+          <a class="button primary" href="#install">Get started</a>
+          <a class="button secondary" href="https://neonwatty.com/posts/logo-designer-skill-claude-code/">Read the walkthrough</a>
+        </div>
+      </div>
+
+      <div class="product-shot" aria-label="Logo designer terminal preview">
+        <div class="mac-strip">
+          <span class="mac-dot red"></span>
+          <span class="mac-dot yellow"></span>
+          <span class="mac-dot green"></span>
+        </div>
+        <div class="terminal">
+          <div class="panel">
+            <div class="terminal-label">Interview</div>
+            <div class="terminal-line muted">What is the brand name?</div>
+            <div class="terminal-line prompt">> Moonbeam</div>
+            <div class="terminal-line muted">Describe your audience and aesthetic.</div>
+            <div class="terminal-line prompt">> Modern, minimal, developer-focused</div>
+          </div>
+          <div class="panel">
+            <div class="terminal-label">Explore</div>
+            <div class="logo-grid">
+              <div class="logo-placeholder">M</div>
+              <div class="logo-placeholder">M</div>
+              <div class="logo-placeholder">M</div>
+            </div>
+          </div>
+          <div class="terminal-line output">Rendering PNGs: 16, 32, 48, 192, 512, 1024, 2048 px</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro">
+      <p>
+        Logo Designer turns a conversation into a finished logo. Ask Claude to design a logo, and the skill handles the rest -- from creative brief to exported assets.
+      </p>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Workflow</p>
+        <h2>Four phases from idea to finished assets.</h2>
+      </div>
+      <div class="steps">
+        <article>
+          <span class="step-number">1</span>
+          <h3>Interview</h3>
+          <p>Claude asks about your brand name, audience, and aesthetic preferences to build a creative brief.</p>
+        </article>
+        <article>
+          <span class="step-number">2</span>
+          <h3>Explore</h3>
+          <p>Generates 3-5 distinct SVG concepts displayed in a side-by-side preview for comparison.</p>
+        </article>
+        <article>
+          <span class="step-number">3</span>
+          <h3>Refine</h3>
+          <p>Iterate on your chosen direction with adjustments to color, layout, typography, and detail.</p>
+        </article>
+        <article>
+          <span class="step-number">4</span>
+          <h3>Export</h3>
+          <p>Renders final PNGs at standard sizes ready for favicons, app icons, and social media.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="export" class="section split">
+      <div class="section-heading">
+        <p class="eyebrow">Export</p>
+        <h2>Every size you need, generated automatically.</h2>
+        <p>The final SVG is rendered to PNG at seven standard sizes covering favicons through high-resolution assets.</p>
+        <div class="sizes-grid">
+          <span class="size-tag">16px</span>
+          <span class="size-tag">32px</span>
+          <span class="size-tag">48px</span>
+          <span class="size-tag">192px</span>
+          <span class="size-tag">512px</span>
+          <span class="size-tag">1024px</span>
+          <span class="size-tag">2048px</span>
+        </div>
+      </div>
+      <div class="feature-list">
+        <article>
+          <h3>Favicon ready</h3>
+          <p>16, 32, and 48px sizes drop straight into your site's favicon setup.</p>
+        </article>
+        <article>
+          <h3>PWA &amp; app icons</h3>
+          <p>192 and 512px sizes match the standard manifest icon requirements.</p>
+        </article>
+        <article>
+          <h3>Print &amp; social</h3>
+          <p>1024 and 2048px give you enough resolution for social cards, print, and marketing.</p>
+        </article>
+        <article>
+          <h3>SVG source</h3>
+          <p>The original SVG is always preserved, so you can scale to any size or edit manually.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="install" class="section install">
+      <div>
+        <p class="eyebrow">Install</p>
+        <h2>One command to add the skill.</h2>
+        <p>
+          Install the plugin, then ask Claude to design a logo. The skill activates automatically for logo-related prompts.
+        </p>
+      </div>
+      <div class="code-card">
+        <pre><code>claude plugin add neonwatty/logo-designer-skill</code></pre>
+      </div>
+    </section>
+
+    <section id="prerequisites" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Prerequisites</p>
+        <h2>PNG export needs one SVG-to-PNG tool.</h2>
+        <p>The skill auto-detects which renderer is available. Install any one of the following.</p>
+      </div>
+      <div class="constraint-grid">
+        <article>
+          <h3>resvg <span style="color: var(--accent); font-size: 12px; font-weight: 700;">RECOMMENDED</span></h3>
+          <p>Fast, accurate SVG rendering via Node.</p>
+          <code>npm install -g @aspect-build/resvg</code>
+        </article>
+        <article>
+          <h3>Inkscape</h3>
+          <p>Full-featured SVG editor with CLI export.</p>
+          <code>brew install inkscape</code>
+        </article>
+        <article>
+          <h3>librsvg</h3>
+          <p>Lightweight GNOME SVG rendering library.</p>
+          <code>brew install librsvg</code>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Logo Designer Skill is MIT licensed.</span>
+    <a href="https://discord.gg/7xsxU4ZG6A">Discord</a>
+    <a href="https://github.com/neonwatty/logo-designer-skill">GitHub</a>
+  </footer>
+</body>
+</html>
