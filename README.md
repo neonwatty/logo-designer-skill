@@ -29,6 +29,33 @@ The skill walks you through four phases:
 3. **Refine** -- Iterate on your chosen direction with adjustments to color, layout, and detail.
 4. **Export** -- Renders final PNGs at standard sizes: 16, 32, 48, 192, 512, 1024, and 2048 px.
 
+## Optional Lineage Canvas Review
+
+The standalone workflow and `logos/preview.html` remain the default. Lineage integration
+is never activated by discovery; it runs only when you explicitly request canvas review
+and provide the Lineage checkout or adapter command.
+
+For that opt-in workflow, pipe the Lineage adapter's versioned JSON receipt into the
+skill's stdin-only `scripts/lineage-handoff.mjs` command with an explicit absolute
+`--logos` directory. Invoke the adapter through `npm --silent run agent:submit` so npm's
+own lifecycle banner cannot contaminate the JSON pipe. The handoff does not start or locate Lineage and accepts no token or
+API origin. Only an accepted, identity-matched receipt is atomically persisted as the
+next collision-safe `logos/iterations/iteration-N.svg`. Its metadata-only result reports
+the relative iteration path, byte count, and SHA-256 hash after file data and supported
+directory metadata are synchronized. Pre-transaction invalid/unavailable receipts use
+typed envelopes without invented transaction or document identity. Continue refinement from that
+verified persisted iteration and regenerate the normal preview. Terminal rejection,
+revert, stale, unavailable, conflict, timeout, and invalid results create no iteration;
+temporary editor disconnections remain in the same bounded wait so a reconnected canvas
+cannot accept work after the skill has stopped listening. Conflict and timeout are never
+automatically resubmitted. If an accepted receipt cannot be persisted locally, the handoff
+returns exit 27 with the exact transaction identity and artifact hash; fix storage and rerun
+the same adapter command with that transaction ID and artifact rather than creating a new
+transaction. If the canvas
+reports that its local server was replaced during provisional acceptance, inspect it
+and use its explicit restore action before starting any new handoff; the locked canvas
+must not be treated as accepted or reverted without authoritative evidence.
+
 ## PNG Export Prerequisites
 
 The export step requires one of the following SVG-to-PNG tools. The skill auto-detects which is available.
