@@ -4,7 +4,6 @@ description: |
   Design and iterate on logos using SVG. Use this skill when the user asks to
   "create a logo", "design a logo", "make me a logo", "iterate on this logo",
   "logo for my project", or discusses logo design, branding icons, or wordmarks.
-version: 1.0.0
 license: MIT
 ---
 
@@ -241,15 +240,19 @@ During Phase 3 (Refine), add a "Favicon Size Check" section below the iteration 
   <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
     <div style="font-size:0.8rem;font-weight:500;">{{LABEL}}</div>
     <div style="display:flex;gap:1rem;align-items:end;">
-      <div><img src="{{PATH}}" width="64" height="64"><div style="font-size:0.75rem;opacity:0.6;">64px</div></div>
-      <div><img src="{{PATH}}" width="32" height="32"><div style="font-size:0.75rem;opacity:0.6;">32px</div></div>
-      <div><img src="{{PATH}}" width="16" height="16"><div style="font-size:0.75rem;opacity:0.6;">16px</div></div>
+      <div><img src="{{FAVICON_PATH}}" width="64" height="64"><div style="font-size:0.75rem;opacity:0.6;">64px</div></div>
+      <div><img src="{{FAVICON_PATH}}" width="32" height="32"><div style="font-size:0.75rem;opacity:0.6;">32px</div></div>
+      <div><img src="{{FAVICON_PATH}}" width="16" height="16"><div style="font-size:0.75rem;opacity:0.6;">16px</div></div>
     </div>
   </div>
 </div>
 ```
 
-This is especially important for icon-only logos. If details disappear at 32px, suggest simplifying (remove fine details, thicken strokes, drop decorative elements).
+For icon-only logos, `{{FAVICON_PATH}}` is the iteration path. For combination
+marks, create a standalone square SVG from the meaningful `#icon` group and use
+its path for `{{FAVICON_PATH}}`. Never squeeze the full horizontal wordmark into
+the square favicon cells. If details disappear at 32px, suggest simplifying
+(remove fine details, thicken strokes, drop decorative elements).
 
 Each `{{CARDS}}` entry is:
 
@@ -371,11 +374,22 @@ When the user says "export", "I'm happy with this", "this is the one", or simila
 
 1. Identify the final iteration SVG (ask the user to confirm which one if ambiguous)
 2. Create the `logos/export/` directory
-3. Copy the final SVG to `logos/export/logo.svg`
-4. Run the bundled export script to generate PNGs:
+3. Copy the final SVG to `logos/export/logo.svg`. For a combination mark, also
+   create a standalone square `logos/export/icon.svg` from its meaningful
+   `#icon` group. Preserve the icon's appearance and give it a tight square
+   `viewBox`; do not include the wordmark.
+4. Run the bundled export script to generate PNGs. Passing an SVG that is
+   already at its destination is supported:
 
 ```bash
 bash <path-to-skill>/scripts/export.sh logos/export/logo.svg logos/export/
+```
+
+For a combination mark, pass the standalone icon as the optional third
+argument:
+
+```bash
+bash <path-to-skill>/scripts/export.sh logos/export/logo.svg logos/export/ logos/export/icon.svg
 ```
 
 The script produces:
@@ -386,6 +400,11 @@ The script produces:
 - `logo-512.png`
 - `logo-1024.png`
 - `logo-2048.png`
+
+When an icon SVG is provided, the script also preserves `icon.svg` and produces
+the matching `icon-16.png` through `icon-2048.png` family. Use the `icon-*`
+assets for favicons and app icons; use the `logo-*` assets where the complete
+combination mark belongs.
 
 5. Report the results: list all exported files with their sizes
 6. If the export script fails (no conversion tool found), tell the user:
