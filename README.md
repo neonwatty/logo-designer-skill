@@ -56,9 +56,9 @@ Three starting directions and the finished design, all made with this skill:
 
 The skill was also used to design the logo for [BugDrop](https://github.com/neonwatty/bugdrop), a GitHub feedback widget.
 
-## Found a logo you like? Fine-tune it together
+## Found a logo you like? Fine-tune it with your agent
 
-Used this skill to find a logo or two you like? Take them into Lineage Logo, a shared visual canvas where you and your agent can adjust SVGs directly. Fine-tune shape, size, color, and spacing together instead of regenerating the whole logo for every small change.
+Use Lineage Logo’s shared visual canvas to adjust shape, size, color, and spacing together - without constantly regenerating the whole logo.
 
 [**Fine-tune your logo in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
 
