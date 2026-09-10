@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Concept 2: Bleep Waveform — audio waveform with a redacted/bleeped section -->
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <g id="icon">
+    <!-- Rounded background -->
+    <rect x="40" y="40" width="432" height="432" rx="96" fill="#09090b"/>
+    <!-- Waveform bars — normal -->
+    <rect x="80" y="220" width="16" height="72" rx="8" fill="url(#grad2)"/>
+    <rect x="108" y="180" width="16" height="152" rx="8" fill="url(#grad2)"/>
+    <rect x="136" y="200" width="16" height="112" rx="8" fill="url(#grad2)"/>
+    <rect x="164" y="160" width="16" height="192" rx="8" fill="url(#grad2)"/>
+    <!-- Bleeped section — flat bars -->
+    <rect x="196" y="230" width="16" height="52" rx="8" fill="#ef4444"/>
+    <rect x="224" y="230" width="16" height="52" rx="8" fill="#ef4444"/>
+    <rect x="252" y="230" width="16" height="52" rx="8" fill="#ef4444"/>
+    <rect x="280" y="230" width="16" height="52" rx="8" fill="#ef4444"/>
+    <!-- Waveform bars — normal resumed -->
+    <rect x="312" y="170" width="16" height="172" rx="8" fill="url(#grad2)"/>
+    <rect x="340" y="190" width="16" height="132" rx="8" fill="url(#grad2)"/>
+    <rect x="368" y="200" width="16" height="112" rx="8" fill="url(#grad2)"/>
+    <rect x="396" y="180" width="16" height="152" rx="8" fill="url(#grad2)"/>
+    <rect x="424" y="210" width="16" height="92" rx="8" fill="url(#grad2)"/>
+  </g>
+</svg>

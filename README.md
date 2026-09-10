@@ -6,10 +6,29 @@ A Claude Code plugin for iterative logo design using SVG. Guides you through a s
 
 > **Read the full walkthrough:** [Claude Code SVG Logo Design: A Reusable Skill for Generating Logos](https://neonwatty.com/posts/logo-designer-skill-claude-code/) — how the skill was built and how to use it end-to-end.
 
-## Installation
+## Keep the logo. Fine-tune the details
+
+No need to regenerate your entire logo for small changes. Fine-tune shape, size, color, and spacing - by hand or with your agent.
+
+[Watch the polishing demo](https://neonwatty.github.io/logo-designer-skill/#polish).
+
+[**Make manual tweaks →**](docs/manual-tweaks.md)
+
+Once the skill has created your `logos/` folder, open it in [Lineage](https://github.com/lineagehq/lineage-logo):
 
 ```bash
-claude plugin add neonwatty/logo-designer-skill
+npx lineage-logo@0.1.0-beta.4 launch --workspace /absolute/path/to/logos
+```
+
+Requires Node.js 22+ on macOS or Linux. Replace the path with your existing logo folder. Save your tweaks as a new SVG iteration, then tell your agent which saved file to continue from. Visual editing is optional.
+
+## Installation
+
+Clone once, then launch Claude Code with the plugin loaded for that session:
+
+```bash
+git clone https://github.com/neonwatty/logo-designer-skill.git
+claude --plugin-dir ./logo-designer-skill
 ```
 
 ## Usage
@@ -30,6 +49,10 @@ The skill walks you through four phases:
 4. **Export** -- Renders final PNGs at standard sizes: 16, 32, 48, 192, 512, 1024, and 2048 px.
 
 ## Optional Lineage Canvas Review
+
+For hands-on editing, start with [Make manual tweaks](docs/manual-tweaks.md).
+For the published beta, follow [Review agent changes](docs/manual-tweaks.md#review-agent-changes-in-the-published-beta).
+The following describes the older checkout-based adapter workflow.
 
 The standalone workflow and `logos/preview.html` remain the default. Lineage integration
 is never activated by discovery; it runs only when you explicitly request canvas review

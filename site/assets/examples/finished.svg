@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Iteration 37: Everything combined — yellow shadow, halftone, 3 beefy bars, pink HAL eye with bigger bezel, wider bar spacing -->
+  <defs>
+    <radialGradient id="hal37" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="50%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+    <pattern id="dots37" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="11" cy="11" r="3.5" fill="#B71C1C" opacity="0.22"/>
+    </pattern>
+  </defs>
+  <g id="icon">
+    <!-- Yellow bold drop shadow -->
+    <rect x="52" y="52" width="432" height="432" rx="80" fill="#FFD600"/>
+    <!-- Red panel -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="#E53935" stroke="#1a1a1a" stroke-width="6"/>
+    <!-- Halftone dots -->
+    <rect x="36" y="36" width="432" height="432" rx="80" fill="url(#dots37)"/>
+    <!-- Yellow bars left — 3 bars, good width, spaced for balance -->
+    <rect x="64" y="228" width="32" height="56" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="106" y="184" width="32" height="144" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="148" y="148" width="32" height="216" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- HAL eye — bigger bezel ring -->
+    <circle cx="252" cy="256" r="78" fill="#1a1a1a" stroke="#FFD600" stroke-width="4"/>
+    <circle cx="252" cy="256" r="64" fill="#1a1a1a"/>
+    <circle cx="252" cy="256" r="48" fill="url(#hal37)"/>
+    <!-- Highlights -->
+    <circle cx="236" cy="240" r="11" fill="#FFFEF0" opacity="0.85"/>
+    <circle cx="260" cy="262" r="5" fill="#FFFEF0" opacity="0.4"/>
+    <!-- Yellow bars right — 3 bars -->
+    <rect x="332" y="148" width="32" height="216" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="374" y="184" width="32" height="144" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="416" y="228" width="32" height="56" rx="10" fill="#FFD600" stroke="#1a1a1a" stroke-width="4"/>
+  </g>
+</svg>
