@@ -12,7 +12,9 @@ No need to regenerate your entire logo for small changes. Fine-tune shape, size,
 
 [Watch the polishing demo](https://neonwatty.github.io/logo-designer-skill/#polish).
 
-[**Make manual tweaks →**](docs/manual-tweaks.md)
+[**Fine-tune in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
+
+[Open your SVG and continue with your agent](docs/manual-tweaks.md).
 
 Once the skill has created your `logos/` folder, open it in [Lineage](https://github.com/lineagehq/lineage-logo):
 

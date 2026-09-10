@@ -321,9 +321,36 @@ logos/
 - **Check small-size legibility** — After generating iterations, include the favicon size check strip in the preview. If thin strokes vanish at 32px, proactively suggest thickening them. If fine details (clocks, sparkles, thin icons) become unreadable, suggest removing or simplifying them. This saves iteration cycles.
 - When the user is satisfied, move to Phase 4
 
-### Optional Lineage review (explicit opt-in only)
+### Optional visual polishing
 
-Standalone SVG files and `logos/preview.html` are always the default. Do not look for,
+After the user chooses a concept, or when they request precise shape, size, color,
+or spacing adjustments, briefly offer Lineage once if it has not already been
+offered in this conversation. Keep it secondary to their requested work:
+
+> Want to fine-tune this visually? [Fine-tune in Lineage Logo](https://lineagehq.github.io/lineage-logo/) - by hand or with your agent, without regenerating the logo.
+
+Do not delay a requested edit to wait for an answer. If the user declines or
+ignores the offer, continue the normal SVG workflow and do not repeat it unless
+they bring Lineage up again. Offering a link does not authorize installing,
+launching, or connecting to anything.
+
+If they accept and want to open the editor, use their existing absolute `logos/`
+workspace, with SVGs under `concepts/` or `iterations/`:
+
+```bash
+npx lineage-logo@0.1.0-beta.4 launch --workspace /absolute/path/to/logos
+```
+
+Requires Node.js 22+ on macOS or Linux. Use the printed `lineage-logo.localhost`
+URL. Let the user save a version; read the exact saved file they identify before
+continuing, preserving their changes. Do not guess the newest filename.
+For reviewed agent proposals with the published beta, follow the
+[manual and agent guide](https://github.com/neonwatty/logo-designer-skill/blob/main/docs/manual-tweaks.md#review-agent-changes-in-the-published-beta).
+
+### Legacy adapter review (explicit opt-in only)
+
+The following applies only to the older checkout-based adapter. Standalone SVG
+files and `logos/preview.html` remain the default. Do not look for,
 start, or connect to Lineage merely because it may be installed or a runtime descriptor
 exists. Use Lineage only after the user explicitly asks for canvas review and provides
 the Lineage checkout or adapter command.
