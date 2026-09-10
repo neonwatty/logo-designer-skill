@@ -48,13 +48,19 @@ The export step requires one of the following SVG-to-PNG tools. The skill auto-d
 
 A complete, real-world example showing the skill in action: 5 initial concepts, 37 iterations across 10 design phases, ending with a polished comic book-styled logo — all in ~10 minutes of conversation.
 
+Three starting directions and the finished design, all made with this skill:
+
+| Concept 1 | Concept 2 | Concept 3 | Finished design |
+| :---: | :---: | :---: | :---: |
+| <img src="site/assets/examples/concept-1.svg" alt="Bleep speech bubble concept" width="180"> | <img src="site/assets/examples/concept-2.svg" alt="Bleep waveform concept" width="180"> | <img src="site/assets/examples/concept-3.svg" alt="Bleep muted speaker concept" width="180"> | <img src="site/assets/examples/finished.svg" alt="Finished Bleep logo" width="180"> |
+
 The skill was also used to design the logo for [BugDrop](https://github.com/neonwatty/bugdrop), a GitHub feedback widget.
 
-## Fine-tune the details in a shared visual canvas
+## Found a logo you like? Fine-tune it together
 
-Lineage Logo is a visual canvas that both you and your agent can use. Fine-tune shape, size, color, and spacing without regenerating your entire logo.
+Used this skill to find a logo or two you like? Take them into Lineage Logo, a shared visual canvas where you and your agent can adjust SVGs directly. Fine-tune shape, size, color, and spacing together instead of regenerating the whole logo for every small change.
 
-[**Try Lineage Logo, a shared editor for humans and agents →**](https://lineagehq.github.io/lineage-logo/)
+[**Fine-tune your logo in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
 
 [![Audio Cut fine-tuning demo: adjust logo colors, size, shape, and positioning in Lineage Logo](site/assets/polishing/audio-readme.gif)](https://neonwatty.github.io/logo-designer-skill/#polish)
 
