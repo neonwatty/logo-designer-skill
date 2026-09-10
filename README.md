@@ -10,19 +10,9 @@ A Claude Code plugin for iterative logo design using SVG. Guides you through a s
 
 No need to regenerate your entire logo for small changes. Fine-tune shape, size, color, and spacing - by hand or with your agent.
 
-[Watch the polishing demo](https://neonwatty.github.io/logo-designer-skill/#polish).
+[**Try Lineage Logo, a shared editor for humans and agents →**](https://lineagehq.github.io/lineage-logo/)
 
-[**Fine-tune in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
-
-[Open your SVG and continue with your agent](docs/manual-tweaks.md).
-
-Once the skill has created your `logos/` folder, open it in [Lineage](https://github.com/lineagehq/lineage-logo):
-
-```bash
-npx lineage-logo@0.1.0-beta.4 launch --workspace /absolute/path/to/logos
-```
-
-Requires Node.js 22+ on macOS or Linux. Replace the path with your existing logo folder. Save your tweaks as a new SVG iteration, then tell your agent which saved file to continue from. Visual editing is optional.
+[Watch the polishing demo](https://neonwatty.github.io/logo-designer-skill/#polish) · [Open your SVG and continue with your agent](docs/manual-tweaks.md).
 
 ## Installation
 
