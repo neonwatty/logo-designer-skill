@@ -12,7 +12,9 @@ No need to regenerate your entire logo for small changes. Fine-tune shape, size,
 
 [**Try Lineage Logo, a shared editor for humans and agents →**](https://lineagehq.github.io/lineage-logo/)
 
-[Watch the polishing demo](https://neonwatty.github.io/logo-designer-skill/#polish) · [Open your SVG and continue with your agent](docs/manual-tweaks.md).
+[![Audio Cut fine-tuning demo: adjust logo colors, size, shape, and positioning in Lineage Logo](site/assets/polishing/audio-readme.gif)](https://neonwatty.github.io/logo-designer-skill/#polish)
+
+*12-second demo: condensed manual edits, followed by an agent polish.* [Watch with captions](https://neonwatty.github.io/logo-designer-skill/#polish) · [Try it with your SVG](docs/manual-tweaks.md).
 
 ## Installation
 
