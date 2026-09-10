@@ -64,7 +64,7 @@ npx lineage-logo@0.1.0-beta.4 submit --workspace /absolute/path/to/logos --propo
 
 The submission waits while you compare the proposed changes in the editor. **Accept and save** creates a saved continuation; **Revert** leaves the logo unchanged. After success, the agent reads the exact `artifact.path` reported in the receipt, relative to the workspace. An agent continuation may have an `-agent-` filename rather than a numbered manual iteration. Do not continue from a guessed filename or treat a failed submission as an accepted edit.
 
-This is the CLI integration used by an agent, not a plugin installation command. The older checkout-based adapter has a different receipt format; do not pipe the published CLI receipt into its handoff script. See [Optional Lineage Canvas Review](../README.md#optional-lineage-canvas-review) only when using that older adapter.
+This is the CLI integration used by an agent, not a plugin installation command. The older checkout-based adapter has a different receipt format; do not pipe the published CLI receipt into its handoff script. See [legacy adapter instructions](../skills/logo-designer/SKILL.md#optional-lineage-review-explicit-opt-in-only) only when using that older adapter.
 
 ## Export the result
 
