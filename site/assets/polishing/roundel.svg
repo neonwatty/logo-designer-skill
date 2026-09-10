@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="24 64 384 384" role="img" aria-label="roundel icon" version="1.1"><g id="icon" aria-label="B exclamation roundel">
+    <circle id="roundel-shadow" aria-label="Offset ink shadow" cx="222" cy="264" r="172" fill="#282254" transform="matrix(1,0,0,1,6,6)"></circle>
+    <circle id="roundel-face" aria-label="Red roundel face" cx="210" cy="252" r="172" fill="#5b4de0" stroke="#12120f" stroke-width="16"></circle>
+    <path id="letter-b" aria-label="Paper B monogram" fill="#ffd625" fill-rule="evenodd" d="M112 153H184C224 153 248 172 248 202C248 223 237 237 221 244C244 252 257 269 257 292C257 328 230 349 187 349H112ZM152 190V230H180C198 230 208 223 208 210C208 197 199 190 180 190ZM152 266V311H184C205 311 216 304 216 289C216 274 205 266 184 266Z" transform="matrix(1,0,0,1,-18,0)"></path>
+    <g id="exclamation" aria-label="Paper exclamation mark" fill="#fffef0" transform="matrix(1.097921,0.233371,-0.233371,1.097921,22.785937,-105.465739)">
+      <path id="exclamation-stem" aria-label="Exclamation stem" d="M276 153H317L312 281H281Z"></path>
+      <rect id="exclamation-dot" aria-label="Exclamation dot" x="278" y="307" width="37" height="42" rx="3"></rect>
+    </g>
+  </g>
+  </svg>

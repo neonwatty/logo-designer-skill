@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 62 392 392" role="img" aria-label="audio cut icon" version="1.1"><g id="icon" aria-label="Recording waveform interrupted by a bleep block">
+    <rect id="badge-shadow" x="49" y="91" width="350" height="342" rx="42" fill="#ff4081" />
+    <rect id="badge" x="36" y="78" width="350" height="342" rx="42" fill="#5b4de0" stroke="#12120f" stroke-width="8" />
+    <path id="waveform-left" d="M66 235h15v31H66zm26-41h15v113H92zm26 21h15v71h-15zm26-61h15v194h-15z" fill="#ffd625" transform="translate(-10 0)" />
+    <path id="waveform-right" d="M288 160h15v183h-15zm26 44h15v95h-15zm26 28h15v39h-15z" fill="#ffd625" transform="translate(-8 0)" />
+    <rect id="bleep-block-shadow" x="171" y="154" width="100" height="205" rx="10" fill="#12120f" />
+    <rect id="bleep-block" x="164" y="147" width="100" height="205" rx="10" fill="#ff4081" stroke="#12120f" stroke-width="6" />
+    <path id="bleep-cut" d="m205 278 12-55h-17l32-48-9 51h18z" fill="#f7f2e8" transform="matrix(1.25,0,0,1.25,-61.625,-33.625)" />
+    <path id="timeline-start" d="M68 111h49v8H68z" fill="#12120f" />
+    <circle id="record-status" cx="351" cy="115" r="9" fill="#ff4081" stroke="#12120f" stroke-width="4" />
+    <path id="timeline-end" d="M305 383h49v8h-49z" fill="#12120f" />
+  </g>
+  </svg>
