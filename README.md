@@ -44,21 +44,21 @@ The export step requires one of the following SVG-to-PNG tools. The skill auto-d
 
 ## Examples
 
-### [Live Showcase: Bleep That Sh*t!](https://neonwatty.github.io/logo-designer-skill/)
+### Bleep That Sh*t
 
-A complete, real-world example showing the skill in action: 5 initial concepts, 37 iterations across 10 design phases, ending with a polished comic book-styled logo — all in ~10 minutes of conversation.
-
-Three starting directions and the finished design, all made with this skill:
+The skill produced five initial concepts and 37 iterations for Bleep That Sh*t! The four images below show three of those initial concepts alongside the finished design.
 
 | Concept 1 | Concept 2 | Concept 3 | Finished design |
 | :---: | :---: | :---: | :---: |
 | <img src="site/assets/examples/concept-1.svg" alt="Bleep speech bubble concept" width="180"> | <img src="site/assets/examples/concept-2.svg" alt="Bleep waveform concept" width="180"> | <img src="site/assets/examples/concept-3.svg" alt="Bleep muted speaker concept" width="180"> | <img src="site/assets/examples/finished.svg" alt="Finished Bleep logo" width="180"> |
 
+[Visit Bleep That Sh*t!](https://bleepthat.sh)
+
 The skill was also used to design the logo for [BugDrop](https://github.com/neonwatty/bugdrop), a GitHub feedback widget.
 
 ## Found a logo you like? Fine-tune it with your agent
 
-Use Lineage Logo’s shared visual canvas to adjust shape, size, color, and spacing together - without constantly regenerating the whole logo.
+Try out our shared visual canvas to adjust shape, size, color, and spacing together - without constantly regenerating the whole logo.
 
 [**Fine-tune your logo in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
 
