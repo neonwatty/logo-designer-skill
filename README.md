@@ -64,8 +64,6 @@ Try out our shared visual canvas to adjust shape, size, color, and spacing toget
 
 [![Audio Cut fine-tuning demo: adjust logo colors, size, shape, and positioning in Lineage Logo](site/assets/polishing/audio-readme.gif)](https://neonwatty.github.io/logo-designer-skill/#polish)
 
-*12-second demo: condensed manual edits, followed by an agent polish.* [Watch with captions](https://neonwatty.github.io/logo-designer-skill/#polish) · [Try it with your SVG](docs/manual-tweaks.md).
-
 ## License
 
 MIT
