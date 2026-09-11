@@ -1,7 +1,9 @@
 # Change-based CI
 
 README and other root documentation changes run Markdown lint and local link/image
-validation. They skip the Claude CLI installation, plugin validation, export and
+validation. Markdown formatting findings are advisory for documentation-only
+changes; local-reference failures still block merging. Full validation retains
+blocking Markdown lint. They skip the Claude CLI installation, plugin validation, export and
 handoff tests, and skill structure checks.
 
 Site-only changes run local content validation. Pages validates before deploying

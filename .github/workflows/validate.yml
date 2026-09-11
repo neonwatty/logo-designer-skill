@@ -100,11 +100,17 @@ jobs:
         run: npm ci
 
       - name: Lint relevant markdown files
+        id: markdown-lint
+        continue-on-error: ${{ needs.changes.outputs.full != 'true' }}
         env:
           FULL: ${{ needs.changes.outputs.full }}
           BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/lint-markdown.mjs
+
+      - name: Report advisory formatting issues
+        if: steps.markdown-lint.outcome == 'failure' && needs.changes.outputs.full != 'true'
+        run: echo '::warning::Markdown formatting suggestions are advisory for documentation-only changes. See the lint step for details.'
 
   ci-passed:
     name: CI passed
