@@ -6,8 +6,57 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      full: ${{ steps.paths.outputs.full }}
+      docs: ${{ steps.paths.outputs.docs }}
+      site: ${{ steps.paths.outputs.site }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Classify complete change set
+        id: paths
+        env:
+          BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/changes.mjs
+      - run: node --test scripts/ci/changes.test.mjs
+      - run: python3 scripts/ci/content.test.py
+
+  content:
+    needs: changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/ci/content.py
+
+  test-scripts:
+    name: Skill Script Tests
+    needs: changes
+    if: needs.changes.outputs.full == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test
+      - run: npm run validate:skills
+
   validate-plugin:
+    needs: changes
+    if: needs.changes.outputs.full == 'true'
     name: Plugin Validation
     runs-on: ubuntu-latest
     steps:
@@ -32,11 +81,15 @@ jobs:
           echo "All JSON files are valid"
 
   validate-markdown:
+    needs: changes
+    if: needs.changes.outputs.full == 'true' || needs.changes.outputs.docs == 'true'
     name: Markdown Validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -46,15 +99,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test skill scripts
-        run: npm test
+      - name: Lint relevant markdown files
+        env:
+          FULL: ${{ needs.changes.outputs.full }}
+          BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/lint-markdown.mjs
 
-      - name: Lint markdown files
-        run: npm run validate:md
-
-      - name: Validate skill structure
-        run: npm run validate:skills
-
-      - name: Check links in markdown
-        run: npm run validate:links
-        continue-on-error: true
+  ci-passed:
+    name: CI passed
+    if: always()
+    needs: [changes, content, validate-plugin, validate-markdown, test-scripts]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require selected checks to succeed
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { passed } from './scripts/ci/gate.mjs';
+          if (!passed(JSON.parse(process.env.NEEDS_JSON))) process.exit(1);
+          NODE
