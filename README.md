@@ -41,7 +41,3 @@ After landing on a design with this skill, I fine tune small details using this 
 [**Fine-tune your logo in Lineage Logo →**](https://github.com/lineagehq/lineage-logo)
 
 [![Audio Cut fine-tuning demo: adjust logo colors, size, shape, and positioning in Lineage Logo](site/assets/polishing/audio-readme.gif)](https://neonwatty.github.io/logo-designer-skill/#polish)
-
-## License
-
-MIT
