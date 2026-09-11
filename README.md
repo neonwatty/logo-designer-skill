@@ -1,6 +1,6 @@
 # Logo Designer Skill
 
-A Claude Code / Codex plugin for iterative logo design using SVG. Guides you through a structured interview, exploration, and refinement process to produce polished logos exported as PNGs.
+A plugin for your agent for iterative logo design using SVG. Guides you through a structured interview, exploration, and refinement process to produce polished logos exported as PNGs.
 
 ## Installation
 
