@@ -58,7 +58,7 @@ The skill was also used to design the logo for [BugDrop](https://github.com/neon
 
 Try out our shared visual canvas to adjust shape, size, color, and spacing together - without constantly regenerating the whole logo.
 
-[**Fine-tune your logo in Lineage Logo →**](https://lineagehq.github.io/lineage-logo/)
+[**Fine-tune your logo in Lineage Logo →**](https://github.com/lineagehq/lineage-logo)
 
 [![Audio Cut fine-tuning demo: adjust logo colors, size, shape, and positioning in Lineage Logo](site/assets/polishing/audio-readme.gif)](https://neonwatty.github.io/logo-designer-skill/#polish)
 
