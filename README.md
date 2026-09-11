@@ -4,12 +4,9 @@ A plugin for your agent for iterative logo design using SVG. Guides you through 
 
 ## Installation
 
-Clone once, then launch Claude Code / Codex with the plugin loaded for that session:
+Clone the repo and ask your agent to use the skill, or better yet just ask your agent to install the skill by pointing it at the repo
 
-```bash
-git clone https://github.com/neonwatty/logo-designer-skill.git
-claude --plugin-dir ./logo-designer-skill
-```
+https://github.com/neonwatty/logo-designer-skill
 
 ## Usage
 
@@ -26,16 +23,6 @@ The skill walks you through four phases:
 2. **Explore** -- Generates 3-5 distinct SVG concepts displayed in a side-by-side preview.
 3. **Refine** -- Iterate on your chosen direction with adjustments to color, layout, and detail.
 4. **Export** -- Renders final PNGs at standard sizes: 16, 32, 48, 192, 512, 1024, and 2048 px.
-
-## PNG Export Prerequisites
-
-The export step requires one of the following SVG-to-PNG tools. The skill auto-detects which is available.
-
-| Tool | Install command |
-|------|----------------|
-| **resvg** (recommended) | `npm install -g @aspect-build/resvg` |
-| Inkscape | `brew install inkscape` |
-| librsvg | `brew install librsvg` |
 
 ## Example
 
