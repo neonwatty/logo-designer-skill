@@ -26,7 +26,16 @@ If the user just says "design a logo" with no project context, skip to Step 2.
 
 ### Step 2: Ask structured questions
 
-Use the `AskUserQuestion` tool to ask these questions. **Batch related questions together** (up to 4 per call) and **skip any question already answered** by the context gathered in Step 1 or by the user's initial message.
+Before creating files or concepts, resolve three required decisions: **format, style, and colors**.
+A decision is resolved only when the user has specified it, the supplied project context establishes
+it, or the user explicitly delegates it with language such as "use your judgment" or "surprise
+me." A project name and purpose alone do not resolve these decisions. Do not interpret a short or
+open-ended request as permission to choose silently.
+
+Use the `AskUserQuestion` tool when it is available. Otherwise, ask the questions in a normal
+response and stop so the user can answer. **Batch related questions together** (up to 4 per call)
+and **skip any question already answered** by the context gathered in Step 1 or by the user's
+initial message.
 
 **Question 1 — Format:**
 ```
@@ -83,7 +92,8 @@ options:
 ### Adapting to context
 
 - **User points to a repo:** Gather context first, then ask only format + style (colors are likely known).
-- **User says "design a logo for X":** Ask format, style, and colors together.
+- **User says "design a logo for X":** Ask format, style, and colors together, then wait for the
+  answers. Do not create logo files in the same turn.
 - **User gives detailed description:** Skip everything already covered, ask only what's missing.
 - **User says "just make something":** Use sensible defaults (icon only, minimal, surprise me) and go straight to Phase 2.
 
