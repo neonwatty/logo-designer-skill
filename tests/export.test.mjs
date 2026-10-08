@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { chmod, mkdtemp, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { chmod, cp, mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -21,8 +21,9 @@ async function fixture() {
   return { directory, bin, log: path.join(directory, "render.log") };
 }
 
-function runExport(args, fixture) {
-  return spawnSync("bash", [exportScript, ...args], {
+function runExport(args, fixture, script = exportScript, cwd) {
+  return spawnSync("bash", [script, ...args], {
+    cwd,
     encoding: "utf8",
     env: { ...process.env, PATH: `${fixture.bin}:${process.env.PATH}`, EXPORT_TEST_LOG: fixture.log },
   });
@@ -39,6 +40,23 @@ test("supports exporting when logo.svg is already in the output directory", asyn
   assert.equal(result.status, 0, result.stderr);
   assert.equal(await readFile(logo, "utf8"), svg);
   assert.deepEqual((await readdir(output)).sort(), ["logo.svg", ...sizes.map((size) => `logo-${size}.png`)].sort());
+});
+
+test("copied skill resolves its renderer adapter from an unrelated working directory", async (t) => {
+  const work = await fixture();
+  t.after(() => rm(work.directory, { recursive: true, force: true }));
+  const installed = path.join(work.directory, "installed skill");
+  await cp(path.join(root, "skills/logo-designer"), installed, { recursive: true });
+  const logo = path.join(work.directory, "source logo.svg");
+  const output = path.join(work.directory, "export");
+  await writeFile(logo, svg);
+  const result = runExport([logo, output], work, path.join(installed, "scripts/export.sh"), work.directory);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(await readFile(path.join(output, "logo.svg"), "utf8"), svg);
+  for (const size of sizes) {
+    assert.equal(await readFile(path.join(output, `logo-${size}.png`), "utf8"), `rendered from ${logo}\n`);
+  }
+  assert.deepEqual((await readFile(work.log, "utf8")).trim().split("\n"), Array(sizes.length).fill(logo));
 });
 
 test("exports separate full-logo and icon families", async () => {

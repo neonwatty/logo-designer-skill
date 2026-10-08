@@ -28,27 +28,10 @@ if [[ -n "$ICON_SVG" ]]; then
   copy_unless_same_file "$ICON_SVG" "$OUTPUT_DIR/icon.svg"
 fi
 
-# Detect available tool
-TOOL=""
-if command -v resvg &>/dev/null; then
-  TOOL="resvg"
-elif npx --yes @aspect-build/resvg --help &>/dev/null 2>&1; then
-  TOOL="npx-resvg"
-elif command -v node &>/dev/null && node -e "require('sharp')" &>/dev/null 2>&1; then
-  TOOL="sharp"
-elif command -v inkscape &>/dev/null; then
-  TOOL="inkscape"
-elif command -v rsvg-convert &>/dev/null; then
-  TOOL="rsvg-convert"
-else
-  echo "ERROR: No SVG-to-PNG converter found."
-  echo ""
-  echo "Install one of the following:"
-  echo "  npm install -g @aspect-build/resvg     (recommended)"
-  echo "  brew install inkscape"
-  echo "  brew install librsvg"
-  exit 1
-fi
+# Resolve bundled adapters from this script, independent of the caller's directory.
+EXPORT_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$EXPORT_SCRIPT_DIR/../lib/integrations/svg-renderer.sh"
+detect_svg_renderer
 
 echo "Using: $TOOL"
 echo ""
@@ -59,33 +42,7 @@ render_svg() {
   local size="$3"
   local output="$OUTPUT_DIR/${basename}-${size}.png"
 
-  case "$TOOL" in
-    resvg)
-      resvg "$source" "$output" --width "$size"
-      ;;
-    npx-resvg)
-      npx --yes @aspect-build/resvg "$source" "$output" --width "$size"
-      ;;
-    sharp)
-      node - "$source" "$output" "$size" <<'NODE'
-        const sharp = require('sharp');
-        const [source, output, sizeText] = process.argv.slice(2);
-        const size = Number(sizeText);
-        sharp(source)
-          .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-          .png()
-          .toFile(output)
-          .then(() => process.exit(0))
-          .catch(e => { console.error(e); process.exit(1); });
-NODE
-      ;;
-    inkscape)
-      inkscape "$source" --export-type=png --export-filename="$output" --export-width="$size"
-      ;;
-    rsvg-convert)
-      rsvg-convert -w "$size" -o "$output" "$source"
-      ;;
-  esac
+  render_svg_to_png "$TOOL" "$source" "$output" "$size"
   echo "  Exported: ${basename}-${size}.png (${size}x${size})"
 }
 

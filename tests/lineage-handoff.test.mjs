@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { Readable } from "node:stream";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 import {
   ADAPTER_RECEIPT_KIND, ADAPTER_RECEIPT_VERSION, consumeAdapterReceipt, MAX_STDIN_BYTES,
@@ -202,10 +203,9 @@ test("strictly rejects malformed, active, external, foreign, and editor-bearing 
   })));
 });
 
-function runCli(logos, input) {
-  const script = new URL("../skills/logo-designer/scripts/lineage-handoff.mjs", import.meta.url);
+function runCli(logos, input, script = fileURLToPath(new URL("../skills/logo-designer/scripts/lineage-handoff.mjs", import.meta.url)), cwd) {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [script.pathname, "--logos", logos], { stdio: ["pipe", "pipe", "pipe"] });
+    const child = spawn(process.execPath, [script, "--logos", logos], { cwd, stdio: ["pipe", "pipe", "pipe"] });
     let stdout = "";
     let stderr = "";
     child.stdout.setEncoding("utf8").on("data", (chunk) => { stdout += chunk; });
@@ -215,6 +215,21 @@ function runCli(logos, input) {
     child.stdin.end(input);
   });
 }
+
+test("copied skill publishes a verified iteration outside the repository", async (t) => {
+  const { root, logos } = await fixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const installed = path.join(root, "installed skill");
+  await cp(new URL("../skills/logo-designer/", import.meta.url), installed, { recursive: true });
+  const result = await runCli(logos, receipt(), path.join(installed, "scripts/lineage-handoff.mjs"), root);
+  assert.equal(result.code, 0, result.stderr);
+  const output = JSON.parse(result.stdout);
+  assert.equal(output.status, "accepted");
+  const persisted = await readFile(path.join(logos, output.iterationPath));
+  assert.equal(persisted.toString(), cleanSvg);
+  assert.equal(output.bytes, persisted.byteLength);
+  assert.equal(output.sha256, createHash("sha256").update(persisted).digest("hex"));
+});
 
 test("CLI consumes stdin only and emits exactly one metadata receipt line", async (t) => {
   const { root, logos } = await fixture();
