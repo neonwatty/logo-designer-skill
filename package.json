@@ -4,7 +4,7 @@
   "private": true,
   "description": "Claude Code skill for designing and iterating on logos using SVG",
   "scripts": {
-    "test": "npm run test:lineage && npm run test:export",
+    "test": "node --test tests/*.test.mjs",
     "test:export": "node --test tests/export.test.mjs",
     "test:lineage": "node --test tests/lineage-handoff.test.mjs",
     "validate": "npm run validate:md && npm run validate:skills && npm run validate:links",
