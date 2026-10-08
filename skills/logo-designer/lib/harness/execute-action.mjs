@@ -2,9 +2,9 @@ import { hostname } from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { unlink } from 'node:fs/promises';
 import { actionSchemas, array, briefSchema, eventSchemas, id, namedPayload, object, requireThat, sourceSchema, text, validate } from '../workflows/contracts.mjs';
-import { allowedActions, isComplete, LIMITS, start, transition, validateAction, validateUserEvent } from '../workflows/design.mjs';
+import { isComplete, LIMITS, start, transition, validateAction, validateUserEvent } from '../workflows/design.mjs';
 import { checkRequest, digest, loadTask, unlockDeadOwner, withStore } from '../state/task-store.mjs';
-import { atomicWrite, ensureDirectory, readBounded, safePath, workspaceRoot } from '../state/files.mjs';
+import { atomicWrite, ensureDirectory, readBounded, safePath, syncDirectory, workspaceRoot } from '../state/files.mjs';
 import { inspectSource, publishArtifact, verifyArtifact } from '../artifacts/registry.mjs';
 import { context } from './context.mjs';
 const named = object({ type: text, arguments: {} });
@@ -102,6 +102,7 @@ export async function execute(workspace, raw, hooks = {}) {
       await store.save(state, entry(command));
       await atomicWrite(await safePath(store.root, `.logo-designer/archives/${state.taskId}.json`, true), JSON.stringify(state));
       await unlink(await safePath(store.root, '.logo-designer/task.json'));
+      await syncDirectory(await safePath(store.root, '.logo-designer'));
       return { receipt: result };
     }
     if (command.kind === 'userEvent') {
@@ -164,7 +165,11 @@ async function runOperation(workspace, operation, hooks) {
     return await withStore(workspace, async store => {
       let state = store.state;
       requireThat(state.pending?.worker?.token === operation.worker.token, 'OPERATION_CHANGED', 'Operation ownership changed.');
-      if (state.phase !== 'CANCELLED') state = transition(state, event, operation.requestId);
+      if (state.phase !== 'CANCELLED') {
+        for (const input of operation.inputs) await verifyArtifact(store.root, input.record);
+        if (operation.kind === 'refine') await verifyArtifact(store.root, state.artifacts.find(x => x.id === state.refinement.baseArtifactId));
+        state = transition(state, event, operation.requestId);
+      }
       const status = state.phase === 'CANCELLED' ? 'cancelled' : 'succeeded';
       for (const requestId of new Set([operation.requestId, operation.attemptRequestId])) {
         const request = state.requests.find(x => x.id === requestId);
