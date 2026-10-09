@@ -2,8 +2,8 @@
 
 This branch separates the existing logo skill into agent guidance, deterministic
 workflow code, artifact operations, and integration adapters. It implements the
-first maintenance step toward the supplied extensible-agent-system plan. It does
-not introduce an independent model loop or a persistent design state machine.
+first maintenance step toward the supplied extensible-agent-system plan. The opt-in managed workflow now persists design state and guards transitions. The
+standalone workflow remains available; neither mode introduces an independent model loop.
 
 ## Ownership
 
@@ -29,7 +29,27 @@ storage. The receipt validator calls SVG validation. Low-level modules do not ca
 the host agent or choose the next design phase. The iteration writer expects a
 validated SVG; callers should enter through the handoff workflow.
 
-## Mapping to the One-Pager
+## Managed Workflow
+
+The explicit experimental mode enters through `scripts/task.mjs`. Its pure workflow
+is `lib/workflows/design.mjs`; `contracts.mjs` supplies argument schemas used by both
+validation and model context. `lib/state/task-store.mjs` owns revisioned snapshots,
+locking, events, and replay receipts. `lib/harness/context.mjs` exposes relevant
+state and allowed actions. `execute-action.mjs` validates proposals, records operation
+intent, executes effects, and applies verified outcomes.
+
+The artifact registry records immutable copies and hashes. Managed export verifies
+PNG data and dimensions, saves a manifest, and supports recovery after publication.
+A bounded built-in PNG decoder keeps copied skills self-contained without runtime
+package installation. It supports static non-interlaced 8-bit PNGs; unsupported
+variants fail explicitly. This is a deliberate alternative to adding a decoder
+package to each installed skill.
+
+See [the managed workflow reference](../skills/logo-designer/references/workflows/managed.md)
+for commands, limits, and recovery. [Evaluation guidance](../evals/README.md) separates
+scripted contract checks from live-model and visual evaluation.
+
+## Standalone Mapping to the One-Pager
 
 - **Profiles:** The plugin manifest and skill frontmatter provide discovery.
   There is no permission-scoped profile registry in this package.
@@ -39,7 +59,7 @@ validated SVG; callers should enter through the handoff workflow.
   operation with enforced validation-before-write and readback-before-success.
 - **Gateway:** The host controls tool access. Bundled commands validate their own
   inputs to the extent implemented; there is no shared authorization gateway.
-- **State:** SVGs and receipts persist artifact evidence. They do not persist the
+- **State:** SVGs persist artifact evidence; Lineage receipts are emitted to stdout and are not automatically logged by that command. They do not persist the
   design brief, selected concept, paused question, or workflow revision.
 - **Presentation:** Lineage continuation facts come from verified stored bytes.
   Preview assembly and interpretation remain agent-driven. Export still reports
@@ -62,15 +82,15 @@ idempotency. Lineage opt-in is an agent instruction; the local command cannot pr
 user authorization. Export retains its existing renderer behavior, including the
 `npx` fallback and differing aspect-ratio handling between backends.
 
-## Validation and Next Experiment
+## Validation and Remaining Experiments
 
 Run `npm test`, `npm run validate:md`, and `npm run validate:skills` from the repo.
 Tests use synthetic adapter receipts and a fake renderer, so they do not require a
 live canvas, install converter packages, or establish visual PNG fidelity.
 
-A subsequent experiment can introduce explicit design state, typed user events,
-allowed actions, guarded transitions, verified export manifests, and replay keys.
-Those are behavior changes and should have dedicated tests. Multi-turn evals should
-then cover resume, corrections, concept switching, ambiguous selection, and failed
-canvas review through the actual runtime. Add runtime layers when their contracts
-are implemented rather than creating empty profile, harness, or task-store modules.
+Run `npm run eval:managed` for a saved multi-process contract trace with a synthetic
+PNG renderer. The managed runtime has tests for state, revisions, questions,
+artifacts, recovery, cancellation, and decoded exports. A real-renderer smoke check also passed for simple geometry; repeated live-model
+scenarios and broader visual checks remain pending before default adoption. Managed
+Lineage integration, a provider-driven model loop, and permission-scoped profiles
+remain future work.

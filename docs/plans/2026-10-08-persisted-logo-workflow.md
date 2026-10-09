@@ -1,6 +1,6 @@
 # Persisted Logo Workflow Experiment
 
-Status: proposed implementation plan; no runtime changes implemented by this document.
+Status: managed runtime and scripted contract evaluation implemented on the experiment branch. A real-renderer smoke check passed; repeated live-model evaluation remains pending before default adoption.
 
 Continue on `codex/agent-system-experiment`, commit and push coherent milestones,
 and do not open a PR. Preserve unrelated working-tree edits.

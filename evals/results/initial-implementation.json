@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-08",
+  "branch": "codex/agent-system-experiment",
+  "environment": {
+    "node": "v22.22.3",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "unitAndIntegrationTests": {
+    "passed": 41,
+    "failed": 0
+  },
+  "scriptedTrace": {
+    "steps": 14,
+    "finalPhase": "COMPLETE",
+    "storedRevision": 12,
+    "registeredArtifacts": 2,
+    "verifiedPngs": 3,
+    "exactReplay": true
+  },
+  "rendererChecks": [
+    {
+      "renderer": "synthetic PNG fixture",
+      "passed": true,
+      "verifiesArtwork": false
+    },
+    {
+      "renderer": "temporary resvg-compatible CLI backed by @resvg/resvg-js",
+      "version": "2.6.2",
+      "passed": true,
+      "sizes": [
+        16,
+        32,
+        64
+      ],
+      "visualInspection": "64px green circle matches the selected refinement"
+    }
+  ],
+  "liveModelRuns": 0,
+  "limitations": [
+    "Scripted proposals are not live model evaluations.",
+    "Real rendering smoke check covered simple geometry only; other renderer backends and typography remain unverified.",
+    "Host file tools remain outside the managed command boundary."
+  ]
+}

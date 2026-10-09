@@ -3,7 +3,7 @@ import { hostname } from 'node:os';
 import { createHash, randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { LIMITS, SCHEMA_VERSION, WORKFLOW_VERSION } from '../workflows/design.mjs';
-import { requireThat, validate, id } from '../workflows/contracts.mjs';
+import { requireThat, validate, id, object, hash } from '../workflows/contracts.mjs';
 import { atomicWrite, ensureDirectory, readBounded, safePath, syncDirectory, workspaceRoot } from './files.mjs';
 export function digest(value) {
   const canonical = x => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object'
@@ -15,6 +15,18 @@ export function validateStored(state) {
   validate(id, state.taskId);
   requireThat(Number.isSafeInteger(state.revision) && state.revision >= 0 && Array.isArray(state.events)
     && Array.isArray(state.requests) && Array.isArray(state.artifacts), 'INVALID_STATE', 'Malformed task state.');
+  const artifactSchema = object({ id, kind: { enum: ['logo', 'icon'] }, parentArtifactId: { type: ['string', 'null'], pattern: id.pattern },
+    sha256: hash, bytes: { type: 'integer', minimum: 1, maximum: 5 * 1024 * 1024 }, width: { type: 'number', minimum: Number.MIN_VALUE },
+    height: { type: 'number', minimum: Number.MIN_VALUE }, path: { type: 'string', pattern: '^\\.logo-designer/artifacts/[a-f0-9]{64}\\.svg$' } });
+  state.artifacts.forEach(artifact => validate(artifactSchema, artifact, 'stored artifact'));
+  requireThat(['IMPORTING', 'AWAITING_SELECTION', 'READY', 'AWAITING_REFINEMENT', 'EXPORT_READY', 'WAITING_FOR_USER', 'COMPLETE', 'CANCELLED'].includes(state.phase)
+    && state.events.length === state.revision && state.events.every((event, i) => event.sequence === i + 1 && event.revision === i + 1)
+    && new Set(state.artifacts.map(x => x.id)).size === state.artifacts.length
+    && Array.isArray(state.offeredIds) && state.offeredIds.every(artifactId => state.artifacts.some(x => x.id === artifactId && x.kind === 'logo'))
+    && (state.selectedArtifactId === null || state.offeredIds.includes(state.selectedArtifactId))
+    && (state.phase !== 'COMPLETE' || state.exportManifest?.files?.length > 0)
+    && (state.phase !== 'WAITING_FOR_USER' || state.question?.id)
+    && (state.phase !== 'AWAITING_REFINEMENT' || state.refinement?.baseArtifactId), 'INVALID_STATE', 'Inconsistent stored workflow state.');
   requireThat(state.events.length <= LIMITS.events && state.artifacts.length <= LIMITS.artifacts
     && Buffer.byteLength(JSON.stringify(state)) <= LIMITS.stateBytes, 'LIMIT_REACHED', 'Task store capacity reached.');
   return state;
@@ -44,11 +56,15 @@ export async function withStore(workspace, callback) {
     requireThat(!await exists(guard), 'LOCKED', 'Lock recovery is in progress.');
     let current = await readState(root);
     return await callback({ root, state: current, async save(next, entry) {
-      next.revision = (current?.revision ?? 0) + 1;
-      next.events.push({ sequence: next.events.length + 1, revision: next.revision, at: new Date().toISOString(), ...entry });
-      validateStored(next);
-      await atomicWrite(await safePath(root, '.logo-designer/task.json', true), JSON.stringify(next, null, 2) + '\n');
-      current = structuredClone(next);
+      const candidate = structuredClone(next);
+      candidate.revision = (current?.revision ?? 0) + 1;
+      candidate.events.push({ ...entry, sequence: candidate.events.length + 1, revision: candidate.revision, at: new Date().toISOString() });
+      validateStored(candidate);
+      const encoded = JSON.stringify(candidate, null, 2) + '\n';
+      requireThat(Buffer.byteLength(encoded) <= LIMITS.stateBytes, 'LIMIT_REACHED', 'Encoded task file exceeds its limit.');
+      await atomicWrite(await safePath(root, '.logo-designer/task.json', true), encoded);
+      Object.assign(next, candidate);
+      current = structuredClone(candidate);
       return next;
     } });
   } finally {
@@ -86,7 +102,12 @@ export function checkRequest(state, command) {
     return prior;
   }
   requireThat(command.expectedRevision === state.revision, 'REVISION_CONFLICT', 'Reload context before proposing another action.', { revision: state.revision });
-  requireThat(state.events.length < LIMITS.events - 4 && Buffer.byteLength(JSON.stringify(state)) < LIMITS.stateBytes - 256 * 1024,
+  const cancelling = command.kind === 'userEvent' && command.payload.type === 'cancel';
+  const finishing = command.kind === 'action' && command.payload.type === 'finish';
+  const headroom = finishing ? 0 : command.kind === 'archive' ? 1
+    : command.kind === 'recover' ? (state.phase === 'CANCELLED' ? 2 : 5) : cancelling ? 3 : 5;
+  const byteHeadroom = finishing ? 0 : headroom <= 3 ? 64 * 1024 : 256 * 1024;
+  requireThat(state.events.length + headroom <= LIMITS.events && Buffer.byteLength(JSON.stringify(state, null, 2)) <= LIMITS.stateBytes - byteHeadroom,
     'LIMIT_REACHED', 'Insufficient capacity for another operation and its recovery records.');
   return null;
 }

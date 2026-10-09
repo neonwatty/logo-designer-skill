@@ -74,3 +74,47 @@ test('managed skill runs when relocated, and changed registered bytes block sele
   assert.equal(rejected.error.code, 'ARTIFACT_CHANGED');
   assert.equal((await loadTask(root)).revision, result.context.revision);
 });
+test('explicit archival is replayable and a new task cannot reuse the archived identity', async t => {
+  const root = await fixture(t); let result = await execute(root, startCommand());
+  result = await execute(root, command('userEvent', 'cancel', result.context.revision, named('cancel')));
+  const archive = command('archive', 'archive1', result.context.revision, {});
+  const saved = await execute(root, archive); assert.equal(await loadTask(root), null);
+  assert.deepEqual((await execute(root, archive)).receipt, saved.receipt);
+  await assert.rejects(execute(root, startCommand()), { code: 'TASK_EXISTS' });
+  const next = { ...startCommand(), taskId: 'next' };
+  const initialized = await execute(root, next); assert.equal(initialized.context.taskId, 'next');
+  assert.deepEqual((await execute(root, archive)).receipt, saved.receipt);
+});
+test('failed operations can be cancelled and reconciled without executing again', async t => {
+  const root = await fixture(t);
+  await execute(root, startCommand(), { afterPublication() { throw new Error('failed'); } });
+  let state = await loadTask(root);
+  const cancelled = await execute(root, command('userEvent', 'cancel', state.revision, named('cancel')));
+  const result = await execute(root, command('recover', 'cleanup', cancelled.context.revision, { operationId: state.pending.id }));
+  assert.equal(result.context.phase, 'CANCELLED'); assert.equal(result.context.pendingOperation, null);
+  assert.equal(result.receipt.status, 'cancelled');
+});
+test('archive replay reconciles interruption between saved intent and archive publication', async t => {
+  const root = await fixture(t); let result = await execute(root, startCommand());
+  result = await execute(root, command('userEvent', 'cancel', result.context.revision, named('cancel')));
+  const request = command('archive', 'archive', result.context.revision, {});
+  const original = await execute(root, request);
+  const archiveFile = path.join(root, '.logo-designer/archives/task.json');
+  await writeFile(path.join(root, '.logo-designer/task.json'), await readFile(archiveFile));
+  await rm(archiveFile);
+  assert.deepEqual((await execute(root, request)).receipt, original.receipt);
+  assert.equal(await loadTask(root), null); assert.ok(await readFile(archiveFile));
+});
+test('capacity limits retain room to cancel, reconcile, finish and archive a failed operation', async t => {
+  const root = await fixture(t);
+  await execute(root, startCommand(), { afterPublication() { throw new Error('failed'); } });
+  const state = await loadTask(root);
+  while (state.events.length < 509) state.events.push({ sequence: state.events.length + 1, revision: state.events.length + 1, type: 'historical' });
+  state.revision = 509;
+  await writeFile(path.join(root, '.logo-designer/task.json'), JSON.stringify(state));
+  let result = await execute(root, command('userEvent', 'cancel', 509, named('cancel')));
+  result = await execute(root, command('recover', 'cleanup', result.context.revision, { operationId: state.pending.id }));
+  await execute(root, command('action', 'finish', result.context.revision, named('finish')));
+  const archived = await execute(root, command('archive', 'archive', result.context.revision, {}));
+  assert.equal(archived.receipt.revision, 512); assert.equal(await loadTask(root), null);
+});

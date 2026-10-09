@@ -52,6 +52,12 @@ async function reserve(store, state, command, kind, inputs = []) {
   await store.save(state, entry(command, 'operationReserved', { operationId, kind, inputs: inputs.map(x => x.record) }));
   return { run: structuredClone(state.pending) };
 }
+async function persistArchive(root, state) {
+  await ensureDirectory(root, '.logo-designer/archives');
+  await atomicWrite(await safePath(root, `.logo-designer/archives/${state.taskId}.json`, true), JSON.stringify(state));
+  await unlink(await safePath(root, '.logo-designer/task.json'));
+  await syncDirectory(await safePath(root, '.logo-designer'));
+}
 export async function execute(workspace, raw, hooks = {}) {
   const command = validateCommand(raw);
   if (command.kind === 'context' || command.kind === 'unlock') {
@@ -63,9 +69,26 @@ export async function execute(workspace, raw, hooks = {}) {
   }
   const prepared = await withStore(workspace, async store => {
     let state = store.state;
+    if (command.kind === 'archive') {
+      let archived;
+      try { archived = JSON.parse((await readBounded(await safePath(store.root, `.logo-designer/archives/${command.taskId}.json`), LIMITS.stateBytes)).toString()); }
+      catch (error) { if (error.code !== 'ENOENT') throw error; }
+      if (archived) {
+        const prior = checkRequest(archived, command);
+        requireThat(prior, 'TASK_EXISTS', 'This task is already archived.');
+        if (state?.taskId === command.taskId) {
+          requireThat(state.revision === archived.revision, 'REVISION_CONFLICT', 'Task changed during archival.');
+          await unlink(await safePath(store.root, '.logo-designer/task.json')); await syncDirectory(await safePath(store.root, '.logo-designer'));
+        }
+        return { receipt: prior.receipt };
+      }
+    }
     if (state) {
       const prior = checkRequest(state, command);
-      if (prior) return { receipt: prior.receipt, context: context(state) };
+      if (prior) {
+        if (command.kind === 'archive') { await persistArchive(store.root, state); return { receipt: prior.receipt }; }
+        return { receipt: prior.receipt, context: context(state) };
+      }
     } else {
       requireThat(command.kind === 'start' && command.expectedRevision === 0, 'NO_TASK', 'Start a task at revision zero first.');
       state = start(command.taskId, command.payload.brief);
@@ -89,6 +112,16 @@ export async function execute(workspace, raw, hooks = {}) {
     if (command.kind === 'recover') {
       requireThat(state.pending?.id === command.payload.operationId, 'NO_OPERATION', 'Operation is no longer pending.');
       requireThat(dead(state.pending.worker), 'OPERATION_RUNNING', 'The operation owner may still be running.');
+      if (state.phase === 'CANCELLED') {
+        const operationId = state.pending.id;
+        const result = receipt(state, command, 'cancelled', { operationId });
+        for (const prior of state.requests.filter(x => x.receipt?.operationId === operationId && x.receipt.status === 'pending')) {
+          prior.receipt = { ...result, requestId: prior.id };
+        }
+        remember(state, command, result); state.pending = null;
+        await store.save(state, entry(command, 'operationCancelled', { operationId }));
+        return { receipt: result, context: context(state) };
+      }
       state.pending.worker = owner(); state.pending.attemptRequestId = command.requestId;
       state.pending.status = 'running'; state.pending.failure = null;
       remember(state, command, receipt(state, command, 'pending', { operationId: state.pending.id }));
@@ -97,12 +130,9 @@ export async function execute(workspace, raw, hooks = {}) {
     }
     if (command.kind === 'archive') {
       requireThat(isComplete(state) && !state.pending, 'INVALID_TRANSITION', 'Only a reconciled terminal task can be archived.');
-      await ensureDirectory(store.root, '.logo-designer/archives');
       const result = receipt(state, command, 'archived'); remember(state, command, result);
       await store.save(state, entry(command));
-      await atomicWrite(await safePath(store.root, `.logo-designer/archives/${state.taskId}.json`, true), JSON.stringify(state));
-      await unlink(await safePath(store.root, '.logo-designer/task.json'));
-      await syncDirectory(await safePath(store.root, '.logo-designer'));
+      await persistArchive(store.root, state);
       return { receipt: result };
     }
     if (command.kind === 'userEvent') {
@@ -112,7 +142,13 @@ export async function execute(workspace, raw, hooks = {}) {
     } else {
       validateAction(state, command.payload);
       const { type, arguments: a } = command.payload;
-      if (type === 'finish') return { receipt: { version: 1, taskId: state.taskId, revision: state.revision, status: state.phase.toLowerCase() }, context: context(state) };
+      if (type === 'finish') {
+        if (state.exportManifest) {
+          const { verifyRecordedExport } = await import('../artifacts/export-manifest.mjs');
+          await verifyRecordedExport(store.root, state.exportManifest);
+        }
+        return { receipt: { version: 1, taskId: state.taskId, revision: state.revision, status: state.phase.toLowerCase() }, context: context(state) };
+      }
       if (type === 'submitRefinement') {
         requireThat(state.artifacts.length < LIMITS.artifacts, 'LIMIT_REACHED', 'Artifact limit reached.');
         await verifyArtifact(store.root, state.artifacts.find(x => x.id === state.refinement.baseArtifactId));
@@ -171,9 +207,8 @@ async function runOperation(workspace, operation, hooks) {
         state = transition(state, event, operation.requestId);
       }
       const status = state.phase === 'CANCELLED' ? 'cancelled' : 'succeeded';
-      for (const requestId of new Set([operation.requestId, operation.attemptRequestId])) {
-        const request = state.requests.find(x => x.id === requestId);
-        request.receipt = { version: 1, taskId: state.taskId, requestId, revision: state.revision + 1, status, operationId: operation.id };
+      for (const request of state.requests.filter(x => x.receipt?.operationId === operation.id && x.receipt.status === 'pending')) {
+        request.receipt = { version: 1, taskId: state.taskId, requestId: request.id, revision: state.revision + 1, status, operationId: operation.id };
       }
       state.pending = null;
       await store.save(state, { requestId: operation.attemptRequestId, type: status === 'cancelled' ? 'operationCancelled' : event.type, payload: status === 'cancelled' ? {} : event.arguments });

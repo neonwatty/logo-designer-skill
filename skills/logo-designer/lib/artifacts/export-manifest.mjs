@@ -75,3 +75,12 @@ export async function performExport(root, operation, hooks = {}) {
     return verifyBundle(root, finalRelative, operation, expected);
   } finally { await rm(staging, { recursive: true, force: true }); }
 }
+
+export async function verifyRecordedExport(root, manifest) {
+  for (const file of manifest.files) {
+    const bytes = await readBounded(await safePath(root, file.path), 64 * 1024 * 1024);
+    const decoded = decodePng(bytes);
+    requireThat(sha256(bytes) === file.sha256 && bytes.length === file.bytes
+      && decoded.width === file.width && decoded.height === file.height, 'ARTIFACT_CHANGED', 'Recorded export has changed.');
+  }
+}

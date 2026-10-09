@@ -10,9 +10,9 @@ export async function main(argv, stream = process.stdin) {
   let workspace;
   try {
     requireThat(argv.length === 2 && argv[0] === '--logos', 'INVALID_INPUT', 'Usage: task.mjs --logos /absolute/path/to/logos < command.json');
-    workspace = argv[1]; let input = ''; let bytes = 0;
-    for await (const chunk of stream) { bytes += Buffer.byteLength(chunk); requireThat(bytes <= LIMITS.inputBytes, 'LIMIT_REACHED', 'Command exceeds 64 KiB.'); input += chunk; }
-    const result = await execute(workspace, JSON.parse(input));
+    workspace = argv[1]; const chunks = []; let bytes = 0;
+    for await (const chunk of stream) { bytes += Buffer.byteLength(chunk); requireThat(bytes <= LIMITS.inputBytes, 'LIMIT_REACHED', 'Command exceeds 64 KiB.'); chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)); }
+    const result = await execute(workspace, JSON.parse(Buffer.concat(chunks).toString('utf8')));
     return { exitCode: result.context?.pendingOperation ? 2 : 0, result };
   } catch (error) {
     let current;

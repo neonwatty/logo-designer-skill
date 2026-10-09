@@ -21,6 +21,7 @@ not require restarting the interview.
 
 | Request | Guidance to read |
 | --- | --- |
+| Explicit managed/persisted workflow experiment | [Managed workflow](references/workflows/managed.md) |
 | New logo or distinct concepts | [Design](references/workflows/design.md) |
 | Modify an existing SVG or explore variations | [Refine](references/workflows/refine.md) |
 | Export a selected logo | [Export](references/workflows/export.md) |
@@ -58,6 +59,11 @@ it: commands import supporting code from `lib/`.
   adapter receipt on stdin and emits one metadata-only result. The canvas review
   reference describes invocation and recovery.
 
-These are concrete tool boundaries, not a complete agent runtime. Conversation
-routing and design phase selection remain with the host agent; this package does
-not yet persist a task state machine or enforce phase transitions in code.
+- `scripts/task.mjs --logos /absolute/path/to/logos` runs the explicit experimental
+  managed workflow. Read its reference before use; code owns saved state and guards
+  transitions for this command.
+
+The standalone workflow still uses host-managed conversation context. The opt-in
+managed workflow persists state, questions, revisions, replay receipts, and verified
+exports. The host model proposes typed events/actions; code validates them. This
+package does not include an independent model loop or a sandbox around host tools.
